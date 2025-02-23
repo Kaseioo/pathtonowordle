@@ -1,6 +1,6 @@
 {
   "name": "ptwordle",
-  "version": "0.1.0",
+  "version": "1.0.617",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "react-select": "^5.10.0",
     "realfavicon": "^0.4.12"
   },
