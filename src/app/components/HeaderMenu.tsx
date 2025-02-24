@@ -1,6 +1,6 @@
-// src/components/HeaderMenu.tsx (or .jsx)
+// src/components/HeaderMenu.tsx
 import React from 'react';
-import Image from 'next/image'; // Import Next.js Image component
+import Image from 'next/image';
 import InstructionModal from './Modal/InstructionModal';
 
 interface HeaderMenuProps {
