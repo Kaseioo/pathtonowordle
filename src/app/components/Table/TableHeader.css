@@ -1,0 +1,10 @@
+.header-tile {
+	@apply flex flex-col items-center justify-center rounded-md capitalize;
+	@apply w-[14vw] sm:w-24 lg:w-32 h-[8vw] md:h-16  text-xs lg:text-lg lg:m-0.5 font-bold;
+	@apply min-w-0 px-2 truncate;
+}
+
+.header-tile.wide {
+	@apply w-[14vw]  md:w-32 lg:w-64 ;
+	@apply min-w-0 px-2 truncate;
+}
