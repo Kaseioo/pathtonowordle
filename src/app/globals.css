@@ -4,7 +4,10 @@
 
 
 body {
-  @apply bg-[theme(colors.background)];
+  /* @apply bg-[url('../../public/images/Background/mbcc.jpg')] bg-cover bg-center bg-no-repeat; */
+  @apply bg-black;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .stripes {
@@ -18,5 +21,11 @@ body {
     --foreground: #2b2b2b;
     --foregroundHighlight: #3b3b3b;
     --bloodred: #f20028;
+    --s1n-border: "#2b2b2b";
+    --s1n-gradient-start: #111;
+    --class-Z-sinner: #b85cff33;
+    --class-S-sinner: #ffad4455;
+    --class-A-sinner: #b85cff55;
+    --class-B-sinner: #43a3ff55;
   }
 }
