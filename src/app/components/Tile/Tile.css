@@ -1,0 +1,63 @@
+@import url("@/app/globals.css");
+
+.tile {
+  position: relative;
+  perspective: 1000px;
+  transition: background-color 0.3s;
+  @apply flex items-center justify-center text-sm font-bold lg:rounded-md;
+}
+
+.tile-face {
+  @apply flex items-center justify-center lg:rounded-md capitalize;
+  @apply text-xs lg:text-lg font-bold;
+  @apply min-w-0 truncate ;
+  backface-visibility: hidden;
+  transition: transform 0.5s ease-in-out;
+}
+
+.tile-dynamic {
+  @apply w-[14vw] h-[14vw] sm:w-24 lg:w-32 sm:h-24 lg:h-32 ;
+}
+
+.wide {
+  @apply w-[14vw] md:w-32 lg:w-64 sm:h-24 lg:h-32 ;
+}
+.tile-face-front {
+  position: absolute;
+  transform: rotateY(0deg);
+}
+
+.tile-face-back {
+  transform: rotateY(180deg);
+}
+
+.flipped .tile-face-front {
+  transform: rotateY(-180deg);
+}
+
+.flipped .tile-face-back {
+  transform: rotateY(0deg);
+}
+.finished .tile-face-front {
+  transform: rotateY(-180deg);
+}
+
+.finished .tile-face-back {
+  transform: rotateY(0deg);
+}
+
+.tile-content {
+  @apply bg-[theme(colors.foreground)] lg:m-1 border-2 border-[theme(colors.s1n-border)] text-white flex items-center justify-center text-sm font-bold lg:rounded-md;
+}
+.tile-content.finished.correct {
+  @apply bg-gradient-to-t from-green-700 from-5% to-transparent to-75% border-green-900;
+}
+.tile-content.present {
+  @apply bg-gradient-to-t from-yellow-600 from-5% to-transparent to-75% border-yellow-600;
+}
+.tile-content.finished.absent:not(.name) {
+  @apply bg-gradient-to-t from-gray-700 from-5% to-transparent to-75%;
+}
+.tile-content.absent {
+  @apply bg-[theme(colors.foreground)] ;
+}
