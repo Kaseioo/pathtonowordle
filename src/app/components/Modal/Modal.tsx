@@ -1,8 +1,8 @@
 // components/Modal.tsx
 import React, { useState, useEffect, ReactNode } from 'react';
-import { IoClose } from 'react-icons/io5'; // Import the close icon from react-icons
+import { IoClose } from 'react-icons/io5';
 
-import '@/components/Modal/Modal.css'; // Import the CSS module
+import '@/components/Modal/Modal.css';
 
 interface ModalProps {
 	isOpen: boolean;

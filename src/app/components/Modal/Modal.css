@@ -4,7 +4,6 @@
 
 .modalContent {
   @apply  bg-s1n-gradient border border-[theme(colors.s1n-border)] p-4 rounded-lg text-white text-center;
-  /* @apply relative w-full max-w-lg p-5 mx-auto bg-white rounded-lg shadow-lg; */
 }
 
 .modalHeader {
