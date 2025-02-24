@@ -1,0 +1,15 @@
+.game-display {
+  @apply flex flex-col sm:flex-row w-full justify-center items-center;
+}
+
+.clock-container {
+  @apply flex flex-col w-full; /* Add some top margin for spacing */
+}
+
+.controller-body {
+  @apply bg-s1n-gradient px-12 py-4 rounded-lg text-white text-center w-[98vw] sm:w-[45rem] lg:w-[67rem];
+  @apply border border-[theme(colors.s1n-border)];
+}
+.game-image {
+  @apply flex max-w-[32rem] max-h-[32rem] md:max-h-[48rem];
+}
