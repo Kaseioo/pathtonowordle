@@ -5,6 +5,7 @@ import {
   Thresholds,
 } from "@/types";
 import characterData from "@/character_data/characters.json";
+import { getUTCDate } from "@/lib/GameUtils";
 
 const DEFAULT_CHARACTERS: Character[] = characterData as Character[];
 
@@ -14,10 +15,6 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   const seeded_character = DEFAULT_CHARACTERS[index];
   console.log(seeded_character);
   return seeded_character;
-}
-
-export function getUTCDate(date: Date = new Date()): string {
-  return date.toISOString().split("T")[0];
 }
 
 // 2025-02-23

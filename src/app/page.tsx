@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, GameState, Thresholds } from "@/types";
-import { getAllCharacters, getSeededCharacter, getUTCDate, calculateThresholds } from "@/lib/CharacterUtils";
+import { getAllCharacters, getSeededCharacter, calculateThresholds } from "@/lib/CharacterUtils";
 import { evaluateGuess } from "@/lib/GuessUtils";
-import { saveGameState, loadGameState } from "@/lib/GameUtils";
+import { saveGameState, loadGameState, getUTCDate } from "@/lib/GameUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";

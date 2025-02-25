@@ -25,8 +25,8 @@ export const loadGameState = (): GameState | null => {
   if (!savedState) return null;
 
   const gameState: GameState = JSON.parse(savedState);
-  const savedDate = new Date(gameState.date).toISOString().split("T")[0];
-  const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = getUTCDate();
+  const savedDate = getUTCDate(new Date(gameState.date));
 
   if (savedDate === currentDate) {
     return gameState;
@@ -34,5 +34,9 @@ export const loadGameState = (): GameState | null => {
     localStorage.removeItem("gameState");
     return null;
   }
-};
+}
+
+export function getUTCDate(date: Date = new Date()): string {
+  return date.toISOString().split("T")[0];
+}
 
