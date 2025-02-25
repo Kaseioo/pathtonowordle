@@ -19,8 +19,8 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion }) => {
 				</span>
 			</div>
 			<div>
-				{/* <a
-					href="https://github.com"
+				<a
+					href="https://github.com/Kaseioo/pathtonowordle"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="mx-2"
@@ -28,12 +28,12 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion }) => {
 					<Image
 						src="/images/github-mark-white.svg"
 						alt="GitHub"
-						width={16} 
-						height={16}
-						className="h-4 w-4 inline"
+						width={32} 
+						height={32}
+						className="inline"
 					/>
 					
-				</a> */}
+				</a>
 				<a
 					href="https://ko-fi.com/pathtoluna"
 					target="_blank"
