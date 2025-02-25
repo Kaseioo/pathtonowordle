@@ -1,7 +1,7 @@
 // src/types.ts
 
 export type AttributeState = "absent" | "present" | "correct" | "empty";
-export type CharacterRank = "S" | "A" | "B" | undefined;
+export type CharacterRank = "S" | "A" | "B";
 
 export interface Character {
   name: string;
@@ -22,7 +22,7 @@ export interface Attribute {
   name: string;
   value: string | "";
   state: AttributeState;
-  rank?: string;
+  rank: string;
 }
 
 export interface Thresholds {
