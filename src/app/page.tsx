@@ -3,13 +3,14 @@
 import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Character, Attribute, AttributeState, Thresholds } from '@/types';
-import { getAllCharacters, getSeededCharacter, calculateThresholds } from '@/lib/CharacterUtils';
+import { getAllCharacters, getSeededCharacter, calculateThresholds, getUTCDate } from '@/lib/CharacterUtils';
 import { evaluateGuess, EvaluateNumericalGuess, GuessDistanceEvaluationResult } from '@/lib/GuessUtils';
 import GameController from '@/components/Game/GameController';
 import GuessTable from '@/components/Table/GuessTable';
 import HeaderMenu from '@/app/components/HeaderMenu';
 import TableHeader from '@/components/Table/TableHeader';
 import assert from "assert";
+import { loadGameState, saveGameState } from '@/lib/GameUtils';
 const MAX_GUESSES = 6;
 const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
 const APP_VERSION = "beta v1.1.617";
@@ -180,12 +181,12 @@ export default function Home() {
           </div>
         </div>
       </div> 
-      <button
+      {/* <button
             onClick={handleNewTarget}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md block"
           >
             New Target
-      </button>
+      </button> */}
     </div>
   );
 }
