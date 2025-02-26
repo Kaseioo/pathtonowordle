@@ -56,11 +56,12 @@ const GameStatus: React.FC<GameStatusProps> = ({
 						)}
 					</div>
 				)}
-			
-				<EmojiGuesses
-					guesses={guesses}
-					gameOver={gameOver}
-				/>
+				<div className="my-4">
+					<EmojiGuesses
+						guesses={guesses}
+						gameOver={gameOver}
+					/>
+				</div>
 			</div>
 	);
 };

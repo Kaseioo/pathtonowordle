@@ -34,7 +34,7 @@ const GameController: React.FC<GameControllerProps> = ({
 	const next_date = new Date(Date.UTC(current_date.getUTCFullYear(), current_date.getUTCMonth(), current_date.getUTCDate() + 1));
 	const gameFinished = gameOver || gameWon;
 	return (
-		<div className="bg-s1n-gradient px-12 py-6 rounded-lg w-fit">
+		<div className="controller-body">
 			<div className="greedy-packing-row gap-4">
 				<GameImageDisplay imageSrc={imageSrc} gameWon={gameWon} sinner={targetCharacter} gameOver={gameOver} />
 				<div>
