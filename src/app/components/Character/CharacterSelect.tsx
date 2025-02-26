@@ -2,7 +2,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { Character, CharacterRank } from '@/types';
-import CharacterPreview from './CharacterPreview';
+import CharacterPreview from '@/components/Character/CharacterPreview';
 
 interface Props {
   characters: Character[];
@@ -93,6 +93,8 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
           const gradient_highlight = `linear-gradient(to top, var(--class-${data.character.rank}-sinner) 3%, transparent 75%)`;
           return {
             ...baseStyles,
+            display: 'flex',
+            alignItems: 'center',
             background: state.isFocused
               ? `linear-gradient(to top, var(--bloodred) 3%, transparent 75%)`
               : gradient_highlight,
@@ -122,9 +124,6 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
             </span>
           </div>
       }}
-    // components={{
-    //   SingleValue: ({ data }) => <div>The previous Sinner selected was {data.label}.</div>
-    // }}
     />
   );
 };
