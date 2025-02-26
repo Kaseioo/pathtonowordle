@@ -78,7 +78,7 @@ const GuessRow: React.FC<GuessRowProps> = ({ guess, thresholds, target_guess, ro
 	return (
 		<>
 			{/* the margin here is to offset mobile/very small screens because for some reason the layout is leaving about this space of margin to the right and I can't find out which element is doing that */}
-			<div key={rowIndex} className="flex flex-row ml-2">
+			<div key={rowIndex} className="inline-flex flex-row">
 				<Tile
 					key={`${rowIndex}-image`}
 					attribute={image}

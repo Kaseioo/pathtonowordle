@@ -1,15 +1,15 @@
-"use client";
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, GameState, Thresholds } from "@/types";
-import { getAllCharacters, getSeededCharacter, getUTCDate, calculateThresholds } from "@/lib/CharacterUtils";
-import { evaluateGuess } from "@/lib/GuessUtils";
-import { saveGameState, loadGameState } from "@/lib/GameUtils";
-import GameController from "@/components/Game/GameController";
-import GuessTable from "@/components/Table/GuessTable";
-import HeaderMenu from "@/app/components/HeaderMenu";
-import TableHeader from "@/components/Table/TableHeader";
+// src/app/page.tsx
+'use client';
+import '@/styles/Container.css'
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Character, Attribute, AttributeState, Thresholds } from '@/types';
+import { getAllCharacters, getSeededCharacter, calculateThresholds } from '@/lib/CharacterUtils';
+import { evaluateGuess, EvaluateNumericalGuess, GuessDistanceEvaluationResult } from '@/lib/GuessUtils';
+import GameController from '@/components/Game/GameController';
+import GuessTable from '@/components/Table/GuessTable';
+import HeaderMenu from '@/app/components/HeaderMenu';
+import TableHeader from '@/components/Table/TableHeader';
 import assert from "assert";
-
 const MAX_GUESSES = 6;
 const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
 const APP_VERSION = "beta v1.1.617";
@@ -144,45 +144,48 @@ export default function Home() {
   if (!targetCharacter) return <div>Loading...</div>;
 
   return (
-    <>
-      {updateThresholds()}
-      <div className="flex flex-col items-center min-h-screen relative">
-        <HeaderMenu appVersion={APP_VERSION} />
-
-        <GameController
-          imageSrc={imageSrc ?? ""}
-          gameOver={gameOver}
-          gameWon={gameWon}
-          targetCharacter={targetCharacter}
-          guesses={guesses}
-          MAX_GUESSES={MAX_GUESSES}
-          allCharacters={allCharacters}
-          handleSelectCharacter={handleSelectCharacter}
-          guessDisabled={guessDisabled}
-        />
-
-        <button
-          onClick={handleNewTarget}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          New Target
-        </button>
-
-        {guesses.length > 0 && (
-          <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
-        )}
-
-        <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-          {guesses.length > 0 && (
-            <GuessTable
-              guesses={guesses}
-              target_guess={targetCharacter}
-              thresholds={thresholds}
-              reverse={reverseTable}
-            />
-          )}
+    updateThresholds(),
+    <div>
+      <HeaderMenu appVersion={APP_VERSION} />
+      <div className="greedy-packing-row">
+        <div>
+          <GameController
+            imageSrc={imageSrc ?? ''}
+            gameOver={gameOver}
+            gameWon={gameWon}
+            targetCharacter={targetCharacter}
+            guesses={guesses}
+            MAX_GUESSES={MAX_GUESSES}
+            allCharacters={allCharacters}
+            handleSelectCharacter={handleSelectCharacter}
+            guessDisabled={guessDisabled}
+          />
         </div>
-      </div>
-    </>
+
+        <div>
+          {guesses.length > 0 && (
+            <>
+              <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
+            </>
+          )}
+
+          <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
+            {guesses.length > 0 &&
+              <GuessTable
+                guesses={guesses}
+                target_guess={targetCharacter}
+                thresholds={thresholds}
+                reverse={reverseTable}
+              />}
+          </div>
+        </div>
+      </div> 
+      <button
+            onClick={handleNewTarget}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md block"
+          >
+            New Target
+      </button>
+    </div>
   );
 }

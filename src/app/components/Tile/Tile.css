@@ -16,11 +16,11 @@
 }
 
 .tile-dynamic {
-  @apply w-[14vw] h-[14vw] sm:w-24 lg:w-32 sm:h-24 lg:h-32 ;
+  @apply w-[14vw] h-[14vw] sm:w-24 lg:w-32 sm:h-24 lg:h-32;
 }
 
 .wide {
-  @apply w-[14vw] md:w-32 lg:w-64 sm:h-24 lg:h-32 ;
+  @apply w-[14vw] md:w-32 lg:w-64 sm:h-24 lg:h-32;
 }
 .tile-face-front {
   position: absolute;
