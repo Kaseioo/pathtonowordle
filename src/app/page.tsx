@@ -1,5 +1,6 @@
 // src/app/page.tsx
 'use client';
+import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Character, Attribute, AttributeState, Thresholds } from '@/types';
 import { getAllCharacters, getSeededCharacter, calculateThresholds } from '@/lib/CharacterUtils';
@@ -189,46 +190,47 @@ export default function Home() {
 
   return (
     updateThresholds(),
-    <div className="flex flex-col items-center  min-h-screen relative">
+    <div>
       <HeaderMenu appVersion={APP_VERSION} />
-
-      <GameController
-        imageSrc={imageSrc ?? ''}
-        gameOver={gameOver}
-        gameWon={gameWon}
-        targetCharacter={targetCharacter}
-        guesses={guesses}
-        MAX_GUESSES={MAX_GUESSES}
-        allCharacters={allCharacters}
-        handleSelectCharacter={handleSelectCharacter}
-        guessDisabled={guessDisabled}
-      />
-
-
-      <button
-        onClick={handleNewTarget}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-      >
-        New Target
-      </button>
-
-
-      {guesses.length > 0 && (
-        <>
-          <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
-        </>
-      )}
-
-      <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-        {guesses.length > 0 &&
-          <GuessTable
+      <div className="greedy-packing-row">
+        <div>
+          <GameController
+            imageSrc={imageSrc ?? ''}
+            gameOver={gameOver}
+            gameWon={gameWon}
+            targetCharacter={targetCharacter}
             guesses={guesses}
-            target_guess={targetCharacter}
-            thresholds={thresholds}
-            reverse={reverseTable}
-          />}
-      </div>
+            MAX_GUESSES={MAX_GUESSES}
+            allCharacters={allCharacters}
+            handleSelectCharacter={handleSelectCharacter}
+            guessDisabled={guessDisabled}
+          />
+        </div>
 
+        <div>
+          {guesses.length > 0 && (
+            <>
+              <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
+            </>
+          )}
+
+          <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
+            {guesses.length > 0 &&
+              <GuessTable
+                guesses={guesses}
+                target_guess={targetCharacter}
+                thresholds={thresholds}
+                reverse={reverseTable}
+              />}
+          </div>
+        </div>
+      </div> 
+      <button
+            onClick={handleNewTarget}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md block"
+          >
+            New Target
+      </button>
     </div>
   );
 }

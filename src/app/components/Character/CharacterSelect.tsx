@@ -23,8 +23,10 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
     character: character,
   }));
 
+  const maxWidthForLg: string = '296.6px'; // Otherwise the tile images are too big 
+
   const formatOptionLabel = (option: OptionType) => (
-    <div className="flex items-center">
+    <>
       {option.character.image && option.character.image.trim() !== "" && (
         <CharacterPreview
           characterRank={option.character.rank as CharacterRank}
@@ -37,7 +39,7 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
         />
       )}
       <span>{option.label}</span>
-    </div>
+    </>
   );
 
   return (
@@ -50,9 +52,9 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
       }}
       formatOptionLabel={formatOptionLabel}
       isSearchable={true}
-      placeholder="You may type the name of a Sinner, or choose them from the list."
+      placeholder="Select a Sinner"
       isDisabled={disabled}
-      className="mb-4 w-full"
+      className="mb-4 flex justify-center"
       classNamePrefix="sinner-select"
       styles={{
         control: (baseStyles) => ({
@@ -60,25 +62,30 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
           backgroundColor: 'black',
           color: 'white',
           border: '1px solid var(--s1n-border)',
-          display: 'flex'
+          display: 'flex',
+          width: maxWidthForLg
         }),
         menu: (baseStyles) => ({
           ...baseStyles,
           backgroundColor: 'var(--foreground)',
           color: 'white',
+          width: maxWidthForLg
         }),
         singleValue: (baseStyles) => ({
           ...baseStyles,
           color: 'white',
+          width: maxWidthForLg
         }),
 
         valueContainer: (baseStyles) => ({
           ...baseStyles,
-          display: 'flex'
+          display: 'flex',
+          width: maxWidthForLg
         }),
         input: (baseStyles) => ({
           ...baseStyles,
           color: 'white',
+          width: maxWidthForLg
         }),
 
         option: (baseStyles, state) => {
@@ -93,13 +100,14 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
             ':active': {
               ...baseStyles[':active'],
               backgroundColor: 'var(--foregroundHighlight)',
+              width: maxWidthForLg
             },
           };
         },
       }}
       components={{
         SingleValue: ({ data }) =>
-          <div className="flex items-center">
+          <div className="">
             <CharacterPreview
               characterRank={data.character.rank as CharacterRank}
               displayValue={data.character.image}
@@ -109,7 +117,7 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
               miniature={true}
               disable_highlight={true}
             />
-            <span className="text-gray-400 hover:text-white transition-colors duration-200">
+            <span className="text-gray-400 hover:text-white transition-colors duration-200 max-w-[296.6]">
               You have selected {data.label}. Press to select another Sinner.
             </span>
           </div>

@@ -74,7 +74,7 @@ const Tile: React.FC<TileProps> = ({
                 height={128}
               />
             ) : (
-              <div className="flex flex-col items-center relative">
+              <div className="inline-flex flex-col items-center relative">
                 {isNumericTile && comparison && (
                   <span className="absolute bottom-5 text-xs lg:text-2xl">
                     {comparison}
