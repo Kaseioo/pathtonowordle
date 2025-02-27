@@ -58,6 +58,13 @@ export function getCharactersFromCodes(guesses: string[]): Character[] {
 	return guesses.map(guess => getCharacterFromCode(guess));
 }
 
+export function getCharacterListWithoutGuesses(guesses: string[]): Character[] {
+	const characters = getAllCharacters();
+  
+	return characters.filter(character => !guesses.includes(character.code));
+}
+
+
 export function getLegacyGuessesFromCodes(codes: string[], seed: string = getUTCDate()): Attribute[][] {
   const characters = getCharactersFromCodes(codes);
   const target = getSeededCharacter(seed);
