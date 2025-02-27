@@ -24,6 +24,7 @@ const InstructionModal: React.FC<InstructionModalProps> = ({ className = 'w-6 h-
     <>
       <a
         onClick={() => setIsModalOpen(true)}
+        className="hover:text-white transition-colors duration-200 cursor-pointer"
       >
         <IoHelpCircleOutline className={className} aria-hidden="true" />
       </a>

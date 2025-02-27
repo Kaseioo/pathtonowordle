@@ -1,7 +1,5 @@
 // src/lib/GameUtils.ts
-import { Character, Attribute, Thresholds, GameState } from "@/types";
-import { getAllCharacters, getSeededCharacter, calculateThresholds } from "@/lib/CharacterUtils";
-import { evaluateGuess } from "@/lib/GuessUtils";
+import { GameState } from "@/types";
 
 // Maximum guesses allowed
 export const MAX_GUESSES = 6;

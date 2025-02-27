@@ -40,7 +40,6 @@ export function EvaluateNumericalGuess(
 export function evaluateGuess(guess: Guess): Attribute[] {
   const display_attributes = ["image", "name"]
   const character_attributes = ["code", "alignment", "tendency", "height", "birthplace"];
-  let result: Attribute[];
 
   const default_columns: Attribute[] = display_attributes.map((key) => ({
     name: key,
@@ -62,8 +61,7 @@ export function evaluateGuess(guess: Guess): Attribute[] {
       rank: guess.character.rank };
   });
 
-  result = [...default_columns, ...character_columns]
-  return result
+  return [...default_columns, ...character_columns]
 }
 
 export function getDistanceMeasurements(guess: Guess, key: string): GuessDistanceEvaluationResult {

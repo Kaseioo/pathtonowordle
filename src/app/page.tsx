@@ -2,9 +2,9 @@
 'use client';
 import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Character, Attribute, AttributeState, Thresholds } from '@/types';
+import { Character, Attribute, Thresholds } from '@/types';
 import { getAllCharacters, getSeededCharacter, calculateThresholds, getUTCDate } from '@/lib/CharacterUtils';
-import { evaluateGuess, EvaluateNumericalGuess, GuessDistanceEvaluationResult } from '@/lib/GuessUtils';
+import { evaluateGuess } from '@/lib/GuessUtils';
 import GameController from '@/components/Game/GameController';
 import GuessTable from '@/components/Table/GuessTable';
 import HeaderMenu from '@/app/components/HeaderMenu';
@@ -128,19 +128,19 @@ export default function Home() {
   );
 
   /** Resets the game with a new target character */
-  const handleNewTarget = () => {
-    localStorage.removeItem("gameState");
-    const new_seed = (Math.random() * 1000).toString();
-    setSeed(new_seed)
-    const new_target = getSeededCharacter(new_seed);
-    calculateThresholds(new_target);
-    setTargetCharacter(new_target);
-    setAllCharacters(getAllCharacters());
-    setGuesses([]);
-    setGameOver(false);
-    setGameWon(false);
-    setImageSrc("");
-  };
+  // const handleNewTarget = () => {
+  //   localStorage.removeItem("gameState");
+  //   const new_seed = (Math.random() * 1000).toString();
+  //   setSeed(new_seed)
+  //   const new_target = getSeededCharacter(new_seed);
+  //   calculateThresholds(new_target);
+  //   setTargetCharacter(new_target);
+  //   setAllCharacters(getAllCharacters());
+  //   setGuesses([]);
+  //   setGameOver(false);
+  //   setGameWon(false);
+  //   setImageSrc("");
+  // };
 
   if (!targetCharacter) return <div>Loading...</div>;
 
