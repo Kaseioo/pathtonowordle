@@ -65,6 +65,9 @@ export type Game = {
     seed: string;
     target?: string; // fallback, but we should be able to always get the same target using the same seed
   }
+  history?: {
+    [date: string]: string[]
+  }
   user_configs?: string;
   debug_info?: string;
 }
