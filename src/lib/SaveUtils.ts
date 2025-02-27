@@ -6,6 +6,40 @@ const LOCALSTORAGE_KEY = "user_games";
 const DEFAULT_GAME = "ptndle";
 
 /**
+ * SAVING OVERVIEW
+ * 
+ * CONSIDERATIONS
+ * 
+ * 0.	Any outgoing return should be a structuredClone* to avoid references from changing during our save proccess. Yes, this WILL happen! Almost everything is running
+ * 		asynchronously. At the very least, a JSON parse and stringify should be done. 
+ * 		*most browsers updated >= 2022 should support this
+ * 
+ * 1. 	Our strategy here is to ALWAYS save to localStorage whenever possible. So, saveGame should be one of the most common functions here.
+ * 		We are doing this so we can scrap all of our other systems and just loadGame() whenever we want some information.
+ * 
+ * 		E.g., I am creating a new game type. I update AvailableGames to include it, and then change our front-end to display it.
+ * 		      We can now simply just loadGame(new_game), and our entire codebase should adapt to it.
+ * 		As of version 1.1, we have to create new variables for every single game.
+ * 
+ * 2.	 Our save directly overwrites the localStorage. There is absolutely no checking whatsoever. Always loadGame() and modify it directly before trying to save!
+ * 
+ * 3.   We trust any external usage of this file to call saveGame() by themselves, while all internal functions try to saveGame() if anything changes.
+ * 
+ * 4.   UserGames is an OBJECT, not an ARRAY. This means that we can have game_name as the key for any games. However, trying to use array functions might get you an
+ * 		empty value []. Be careful.
+ * 
+ * ERROR HANDLING
+ * 
+ * - If a game cannot be loaded, a new empty save is created to avoid further errors.
+ * - If there is no saved data, an empty object is returned.
+ * - If a game is not found, a new empty save is created.
+ * - If X, create new save. We want to ALWAYS have a save in hand.
+ * 
+ * 
+ * 
+ */
+
+/**
  * Loads a game from local storage.
  * @param game_name - The name of the game to load.
  * @returns The loaded game data, or a new empty game if it doesn't exist.
