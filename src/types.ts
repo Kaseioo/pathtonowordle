@@ -48,6 +48,32 @@ export type GameState = {
   seed: string; // Seed for cheating prevention
 };
 
+export type AvailableGames = "ptndle" | "ptndle_endless";
+
+export type Game = {
+  name: AvailableGames;
+  dates: {
+    first_played: string;
+    last_played: string;
+  };
+  scoring: {
+    streak: number;
+    high_score: number;
+  }
+  data: {
+    guesses: string[] 
+    seed: string;
+    target?: string; // fallback, but we should be able to always get the same target using the same seed
+  }
+  user_configs?: string;
+  debug_info?: string;
+}
+
+// as we plan to have the AvailableGames as key, we need an object and not an array
+export type UserGames = {
+  [key in AvailableGames]: Game;
+}
+
 export type CharacterAttributes = [
   { name: "image"; value: string, state: string, rank: string},
   { name: "name"; value: string, state: string, rank: string},
