@@ -17,6 +17,19 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   return seeded_character;
 }
 
+export function getCharacterFromCode(code: string): Character {
+  const foundCharacter = DEFAULT_CHARACTERS.find(
+    (character) => character.code === code
+  );
+
+  if (!foundCharacter) {
+    throw new Error(`Character with code ${code} not found.`);
+  }
+  
+  return foundCharacter;
+
+}
+
 // 2025-02-23
 // https://stackoverflow.com/a/52171480
 // https://github.com/bryc/code/blob/fdd2d21471febe58c7879707c0f43a65e1dd8248/jshash/experimental/cyrb53.js
