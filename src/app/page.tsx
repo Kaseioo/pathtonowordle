@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, GameState, Thresholds } from "@/types";
-import { getAllCharacters, getSeededCharacter, calculateThresholds } from "@/lib/CharacterUtils";
+import { Character, Attribute, GameState, Thresholds, Game, AvailableGames } from "@/types";
+import { getAllCharacters, getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { evaluateGuess } from "@/lib/GuessUtils";
-import { saveGameState, loadGameState, getUTCDate } from "@/lib/GameUtils";
+import { saveGameState, loadGameState, getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes } from "@/lib/GameUtils";
+import { saveGame, loadGame, createEmptySave, getLastPlayedGame, updateLastPlayed } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
@@ -27,6 +28,15 @@ export default function Home() {
   const lastRowRef = useRef<HTMLDivElement>(null);
   let thresholds: Thresholds = { code: { high: 0, very_high: 0 }, height: { high: 0, very_high: 0 } };
 
+  const [currentGame, setCurrentGame] = useState<AvailableGames>("ptndle");
+  const [saveGuesses, setSaveGuesses] = useState<Attribute[][]>([]);
+  const [saveTarget, setSaveTarget] = useState<Character>();
+  const [saveSeed, setSaveSeed] = useState<string>("");
+  const [saveWon, setSaveWon] = useState<boolean>(false);
+  const [saveOver, setSaveOver] = useState<boolean>(false);
+
+
+
   /** Toggles table order */
   const handleReverseChange = (newReverse: boolean) => setReverseTable(newReverse);
 
@@ -35,9 +45,36 @@ export default function Home() {
     thresholds = calculateThresholds(targetCharacter!);
   }
 
+  function updateBasedOnSave(){
+    const game_to_load = getLastPlayedGame();
+    const loaded_game = loadGame(game_to_load);
+    // saveGame(loaded_game);
+    // updateLastPlayed(loaded_game);
+    console.log("our current game data is", loaded_game);
+
+    const loaded_seed = loaded_game.data.seed;
+    const is_game_won = isGameWon(loaded_game.data.guesses, getSeededCharacter(loaded_seed).code);
+    const is_game_over = isGameOver(loaded_game.data.guesses, getSeededCharacter(loaded_seed).code);
+    const legacy_guesses = getLegacyGuessesFromCodes(loaded_game.data.guesses);
+
+    setCurrentGame(loaded_game.name);
+    setSaveGuesses(legacy_guesses);
+    setSaveSeed(loaded_game.data.seed);
+    setSaveTarget(getSeededCharacter(loaded_seed));
+    setSaveWon(is_game_won);
+    setSaveOver(is_game_over);
+
+
+    console.log("legacy guesses", legacy_guesses);
+    console.log("is game won?", is_game_won);
+    console.log("is game over?", is_game_over);
+
+  }
+
   /** Initializes or Loads the Game */
   useEffect(() => {
     const loadedGameState = loadGameState();
+    updateBasedOnSave();
 
     if (loadedGameState) {
       loadedGameState.guesses.forEach((guess) => console.log(guess))
@@ -84,6 +121,13 @@ export default function Home() {
         seed: seed
       });
     }
+
+      const loaded_game = loadGame(currentGame);
+      console.log("guesses", guesses)
+      loaded_game.data.guesses = guesses.map((guess) => guess[2].value);
+      loaded_game.data.seed = seed;
+      saveGame(loaded_game);
+      updateBasedOnSave();
   }, [guesses, gameOver, seed, targetCharacter]);
 
   /** Scrolls to the last guess */
@@ -151,10 +195,10 @@ export default function Home() {
 
         <GameController
           imageSrc={imageSrc ?? ""}
-          gameOver={gameOver}
-          gameWon={gameWon}
+          gameOver={saveOver}
+          gameWon={saveWon}
           targetCharacter={targetCharacter}
-          guesses={guesses}
+          guesses={saveGuesses}
           MAX_GUESSES={MAX_GUESSES}
           allCharacters={allCharacters}
           handleSelectCharacter={handleSelectCharacter}
@@ -175,7 +219,7 @@ export default function Home() {
         <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
           {guesses.length > 0 && (
             <GuessTable
-              guesses={guesses}
+              guesses={saveGuesses}
               target_guess={targetCharacter}
               thresholds={thresholds}
               reverse={reverseTable}
