@@ -34,7 +34,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 				) : (
 					<div>
 						<h2 className="text-2xl font-bold">Path to Nowordle</h2>
-						{hasGameStarted(guesses) ? (
+						{!hasGameStarted(guesses) ? (
 							<>
 								<p className="text-lg mb-2">
 									Try to find the daily Sinner.
