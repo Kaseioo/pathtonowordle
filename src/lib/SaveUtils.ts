@@ -1,6 +1,7 @@
 // src/lib/SaveUtils.ts
 import { AvailableGames, Game, UserGames } from "@/types";
-import { getUTCDate } from "@/lib/GameUtils";
+import { getUTCDate, isGameWon } from "@/lib/GameUtils";
+import { getSeededCharacter } from "./CharacterUtils";
 
 const LOCALSTORAGE_KEY = "user_games";
 const DEFAULT_GAME = "ptndle";
@@ -64,9 +65,33 @@ function loadGame(game_name: AvailableGames): Game {
  * @param game - The game to update.
  */
 function updateLastPlayed(game: Game): void {
-	game.dates.last_played = getUTCDate(); 
+	const last_played = Object.keys(game.history).at(-1);
+	if (!last_played) return;
+
+	game.dates.last_played = last_played;
+	saveGame(game);
+	
+}
+
+
+/**
+ * Updates the score of a game and saves it.
+ * @param game - The game to update.
+ */
+function updateScore(game: Game): void {
+	const hasPlayerWon = isGameWon(game.data.guesses, getSeededCharacter(game.data.seed).code);
+
+	if (hasPlayerWon) {
+		game.scoring.total_wins += 1;
+		game.scoring.streak += 1;
+		game.scoring.high_score = Math.max(game.scoring.streak, game.scoring.high_score);
+	} else {
+		game.scoring.streak = 0;
+	}
+
 	saveGame(game);
 }
+
 
 /**
  * Creates an empty game_name game, and directly saves it to localStorage.
@@ -85,12 +110,16 @@ function createEmptySave(game_name: AvailableGames = DEFAULT_GAME): Game {
 		scoring: {
 			streak: 0,
 			high_score: 0,
+			total_wins: 0
 		},
 		data: {
 			guesses: [],
 			target: "",
 			seed: today,
 		},
+		history: {},
+		user_configs: JSON.stringify({}),
+		debug_info: JSON.stringify({}),
 	};
 
 	saveGame(empty_game);
@@ -208,5 +237,6 @@ export {
 	createEmptySave,
 	updateLastPlayed,
 	getLastPlayedGame,
-	getAllGames
+	getAllGames,
+	updateScore
 }

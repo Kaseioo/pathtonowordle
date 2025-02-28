@@ -53,13 +53,14 @@ export type Game = {
   scoring: {
     streak: number;
     high_score: number;
+    total_wins: number;
   }
   data: {
     guesses: string[] 
     seed: string;
     target?: string; // fallback, but we should be able to always get the same target using the same seed
   }
-  history?: {
+  history: {
     [date: string]: string[]
   }
   user_configs?: string;
