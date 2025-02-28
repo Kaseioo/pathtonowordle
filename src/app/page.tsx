@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames, Game } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame, updateScore, updateLastPlayed } from "@/lib/SaveUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
@@ -54,7 +54,7 @@ export default function Home() {
     updateLastPlayed(loaded_game);
 
     if (is_game_over) {
-      updateScore(loaded_game);
+      updateScores(loaded_game);
       setImageSrc(loaded_target.image_full);
     } else if (hasGameStarted(loaded_game.data.guesses)) {
       const last_character_code = loaded_game.data.guesses[loaded_game.data.guesses.length - 1];
