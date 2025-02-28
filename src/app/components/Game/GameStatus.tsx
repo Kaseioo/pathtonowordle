@@ -37,8 +37,12 @@ const GameStatus: React.FC<GameStatusProps> = ({
 						{guesses.length === 0 ? (
 							<>
 								<p className="text-lg mb-2">
-									Try to find the daily Sinner based on their characteristics.
+									Try to find the daily Sinner.
 								</p>
+								<p className="text-md mb-2">
+								Press the ? button on the top left corner to learn how to play.
+								</p>
+								
 								<Image
 									src="/images/placeholder.png"
 									alt="Selected Character"
