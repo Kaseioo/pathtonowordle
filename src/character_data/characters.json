@@ -598,9 +598,22 @@
     "rank": "A"
   },
   {
+    "name": "Jelena",
+    "code": "016",
+    "alignment": "Love",
+    "tendency": "Catalyst",
+    "height": "171cm",
+    "birthplace": "Other",
+    "birthday": "December 28",
+    "release date": "29",
+    "image": "/images/Sinner/jelena-icon.png",
+    "image_full": "images/Sinner/jelena-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Joan",
     "code": "237",
-    "alignment": "October 29",
+    "alignment": "Anger",
     "tendency": "Arcane",
     "height": "173cm",
     "birthplace": "Eastside",
@@ -1012,6 +1025,19 @@
     "image": "/images/Sinner/pepper-icon.png",
     "image_full": "/images/Sinner/pepper-mugshot.png",
     "rank": "B"
+  },
+  {
+    "name": "Pine",
+    "code": "617",
+    "alignment": "Pestilence",
+    "tendency": "Reticle",
+    "height": "164cm",
+    "birthplace": "Eastside",
+    "birthday": "February 6",
+    "release date": "29",
+    "image": "/images/Sinner/pine-icon.png",
+    "image_full": "/images/Sinner/pine-mugshot.png",
+    "rank": "A"
   },
   {
     "name": "Pricilla",
