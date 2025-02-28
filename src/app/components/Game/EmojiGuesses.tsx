@@ -59,8 +59,11 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
 
   const handleCopyDiscordClick = useCallback(() => {
     const textToCopy = [">>> " + results_header, results_subheader, ...emojis.map(row => '' + row.join(''))].join('\n');
+    const website_link = 'https://ptndle.com';
+    const formatted_text = textToCopy + `\n${website_link}`
+    // add website link after everything as a last row
 
-    copyToClipboard(textToCopy, "discord");
+    copyToClipboard(formatted_text, "discord");
 
   }, [emojis, setCopySuccessDiscord]);
 
@@ -99,10 +102,12 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
 
   return (
     <div className="mt-4">
-      <div className="text-center">
-        <h2 className="text-xl font-bold">{results_header}</h2>
-        <p className="text-lg">{results_subheader}</p>
-      </div>
+      {gameOver && (
+        <div className="text-center">
+          <h2 className="text-xl font-bold">{results_header}</h2>
+          <p className="text-lg">{results_subheader}</p>
+        </div>
+      )}
       {renderEmojis()}
       {gameOver && (
         <>
