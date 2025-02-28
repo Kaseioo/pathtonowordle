@@ -64,9 +64,9 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   }, [emojis, setCopySuccess]); 
 
   const renderEmojis = () => (
-    <div ref={copyRef} className="flex flex-col items-center">
+    <div ref={copyRef}>
       {emojis.map((guess, index) => (
-        <div key={index} className="flex flex-row">
+        <div key={index} className="flex flex-row justify-center">
           {guess.map((emoji, innerIndex) => (
             <div key={innerIndex} className="text-4xl">{emoji}</div>
           ))}
@@ -76,7 +76,7 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   );
 
   return (
-    <div>
+    <div className="mt-4">
       {renderEmojis()}
       {gameOver && (
         <button

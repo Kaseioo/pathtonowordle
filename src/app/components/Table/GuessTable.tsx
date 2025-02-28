@@ -18,7 +18,7 @@ const GuessTable: React.FC<GuessTableProps> = ({
 	const displayedGuesses = reverse ? [...guesses].reverse() : guesses;
 	return (
 		<>
-			<div className="flex flex-col mt-1">
+			<div className="inline-flex flex-col mt-1">
 				{displayedGuesses.map((guess, index) => (
 					<GuessRow
 						key={index}

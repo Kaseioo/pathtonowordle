@@ -22,8 +22,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 }) => {
 	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'try' : 'tries'}`;
 	return (
-		<div className="flex flex-col items-center lg:w-1/2 mt-4 lg:mt-0">
-			<div className="text-center">
+			<div className="text-center flex flex-col">
 				{gameOver ? (
 					<div>
 						<h2 className="text-2xl font-bold">
@@ -62,15 +61,13 @@ const GameStatus: React.FC<GameStatusProps> = ({
 						)}
 					</div>
 				)}
-				<div className='mt-4'>
-				<EmojiGuesses
-					guesses={guesses}
-					gameOver={gameOver}
-				/>
-
+				<div className="my-4">
+					<EmojiGuesses
+						guesses={guesses}
+						gameOver={gameOver}
+					/>
 				</div>
 			</div>
-		</div>
 	);
 };
 

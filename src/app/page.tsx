@@ -1,4 +1,5 @@
-"use client";
+'use client';
+import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
@@ -85,34 +86,37 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center min-h-screen relative">
         <HeaderMenu appVersion={APP_VERSION} />
-
-        <GameController
-          imageSrc={imageSrc ?? ""}
-          gameOver={saveOver}
-          gameWon={saveWon}
-          targetCharacter={saveTarget}
-          guesses={saveGuesses}
-          MAX_GUESSES={MAX_GUESSES}
-          allCharacters={saveAllCharacters}
-          handleSelectCharacter={handleSelectCharacter}
-          guessDisabled={guessDisabled}
-        />
-
-        {hasGameStarted(saveGuesses) && (
-          <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
-        )}
-
-        <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-          {hasGameStarted(saveGuesses) && (
-            <GuessTable
+        <div className="greedy-packing-row">
+          <div>
+            <GameController
+              imageSrc={imageSrc ?? ""}
+              gameOver={saveOver}
+              gameWon={saveWon}
+              targetCharacter={saveTarget}
               guesses={saveGuesses}
-              target_guess={saveTarget}
-              thresholds={calculateThresholds(getSeededCharacter(saveSeed)!)}
-              reverse={reverseTable}
+              MAX_GUESSES={MAX_GUESSES}
+              allCharacters={saveAllCharacters}
+              handleSelectCharacter={handleSelectCharacter}
+              guessDisabled={guessDisabled}
             />
-          )}
+          </div>
+  
+          <div>
+            {hasGameStarted(saveGuesses) && (
+              <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
+            )}
+
+            <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
+              {hasGameStarted(saveGuesses) && (
+                <GuessTable
+                  guesses={saveGuesses}
+                  target_guess={saveTarget}
+                  thresholds={calculateThresholds(getSeededCharacter(saveSeed)!)}
+                  reverse={reverseTable}
+                />
+                )}
+          </div>
         </div>
       </div>
     </>

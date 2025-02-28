@@ -23,7 +23,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 	};
 
 	return (
-		<div className="flex flex-row lg:mt-4 rounded-md p-2 text-white border border-[theme(colors.s1n-border)] bg-s1n-gradient">
+		<div className="inline-flex flex-row lg:mt-4 rounded-md p-2 text-white border border-[theme(colors.s1n-border)] bg-s1n-gradient">
 			<div className="header-tile relative">
 				<span className="cursor-pointer" onClick={handleImageSortClick}>
 					Image

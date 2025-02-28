@@ -28,18 +28,14 @@ const GameImageDisplay: React.FC<GameImageDisplayProps> = ({
 	const gradient_to_render = gameWon ? win_gradient : gameOver ? loss_gradient : default_gradient;
 
 	return (
-		<div className="flex flex-col items-center">
-			<div className={`relative overflow-hidden ${gradient_to_render}`}>
-				<Image
-					src={imageSrc}
-					alt="Selected Character"
-					width={512}
-					height={512}
-					className="h-full w-full"
-					unoptimized={true}
-				/>
-			</div>
-		</div>
+		<Image
+			src={imageSrc}
+			alt="Selected Character"
+			width={512}
+			height={512}
+			className={`${gradient_to_render} max-h-[70vh] min-h-[500px] max-w-[300px] w-auto object-cover`}
+			unoptimized={true}
+		/>
 	);
 };
 

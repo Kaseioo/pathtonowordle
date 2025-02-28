@@ -1,5 +1,5 @@
 // components/Modal.tsx
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useEffect, ReactNode } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 import '@/components/Modal/Modal.css';

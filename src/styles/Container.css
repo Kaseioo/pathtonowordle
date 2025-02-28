@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --max-cols: 5;
+  --packing-gap: 10px;
+}
+
+@layer base {
+    html, body {
+        @apply text-white
+    }
+
+    flex { /* Never use normal flex :sob: */
+        @apply inline-flex
+    }
+
+}
+
+
+@layer components {
+    /**
+    *  Greedy row wrapping for packing
+    */
+    .greedy-packing-row {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--packing-gap);
+        @apply items-center justify-center w-full;
+    }
+
+    .greedy-anchor {
+        flex-shrink: 0
+    }
+
+    .greedy-scaler {
+        flex-shrink: 2;
+        contain: content;
+    }
+
+    .greedy-scaler > * {
+        @apply flex-auto
+    }
+}
