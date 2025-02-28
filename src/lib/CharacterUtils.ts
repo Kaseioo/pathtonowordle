@@ -16,7 +16,7 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   return seeded_character;
 }
 
-function getUTCDate(date: Date = new Date()): string {
+export function getUTCDate(date: Date = new Date()): string {
   return date.toISOString().split("T")[0];
 }
 

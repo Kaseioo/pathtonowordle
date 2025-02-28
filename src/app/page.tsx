@@ -1,234 +1,192 @@
 // src/app/page.tsx
 'use client';
+import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Character, Attribute, AttributeState, Thresholds } from '@/types';
-import { getAllCharacters, getSeededCharacter, calculateThresholds } from '@/lib/CharacterUtils';
-import { evaluateGuess, EvaluateNumericalGuess, GuessDistanceEvaluationResult } from '@/lib/GuessUtils';
+import { Character, Attribute, Thresholds } from '@/types';
+import { getAllCharacters, getSeededCharacter, calculateThresholds, getUTCDate } from '@/lib/CharacterUtils';
+import { evaluateGuess } from '@/lib/GuessUtils';
 import GameController from '@/components/Game/GameController';
 import GuessTable from '@/components/Table/GuessTable';
 import HeaderMenu from '@/app/components/HeaderMenu';
 import TableHeader from '@/components/Table/TableHeader';
-
+import assert from "assert";
+import { loadGameState, saveGameState } from '@/lib/GameUtils';
 const MAX_GUESSES = 6;
-const ATTRIBUTE_KEYS = ['code', 'alignment', 'tendency', 'height', 'birthplace'];
+const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
 const APP_VERSION = "beta v1.1.617";
-
-type GameState = {
-  guesses: (Attribute[])[];
-  gameOver: boolean;
-  gameWon: boolean;
-  targetCharacter: Character;
-  date: string; // Date string (YYYY-MM-DD)
-};
 
 export default function Home() {
   const [targetCharacter, setTargetCharacter] = useState<Character | null>(null);
+  const [seed, setSeed] = useState<string>("") // targetCharacter is kinda redundent with seed as well
   const [allCharacters, setAllCharacters] = useState<Character[]>([]);
-  const [guesses, setGuesses] = useState<(Attribute[])[]>([]);
+  const [guesses, setGuesses] = useState<Attribute[][]>([]);
   const [guessDisabled, setGuessDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
-  const [imageSrc, setImageSrc] = useState<string>();
+  const [imageSrc, setImageSrc] = useState<string>("");
   const [reverseTable, setReverseTable] = useState(false);
   const lastRowRef = useRef<HTMLDivElement>(null);
   let thresholds: Thresholds = { code: { high: 0, very_high: 0 }, height: { high: 0, very_high: 0 } };
 
+  /** Toggles table order */
+  const handleReverseChange = (newReverse: boolean) => setReverseTable(newReverse);
 
+  /** Updates thresholds based on the target character */
+  function updateThresholds() {
+    thresholds = calculateThresholds(targetCharacter!);
+  }
 
-
-  const handleReverseChange = (newReverse: boolean) => {
-    setReverseTable(newReverse);
-  };
-
-  const saveGameState = (gameState: GameState) => {
-    localStorage.setItem('gameState', JSON.stringify(gameState));
-  };
-
-  const loadGameState = (): GameState | null => {
-    const savedState = localStorage.getItem('gameState');
-    if (savedState) {
-      const gameState: GameState = JSON.parse(savedState);
-      const savedDate = new Date(gameState.date).toISOString().split('T')[0]
-      const currentDate = new Date().toISOString().split('T')[0];
-
-      if (savedDate == currentDate) {
-        return gameState;
-
-      } else {
-        localStorage.removeItem('gameState');
-        return null;
-      }
-    }
-    return null;
-  };
-
-  // Load game state on initial render
+  /** Initializes or Loads the Game */
   useEffect(() => {
     const loadedGameState = loadGameState();
 
     if (loadedGameState) {
+      loadedGameState.guesses.forEach((guess) => console.log(guess))
+      assert(loadedGameState.guesses.every((guess) => guess.length === 7)) // Assertion here for now for object representation check
+      const target_character = getSeededCharacter(loadedGameState.seed)
+      const is_game_won = loadedGameState.guesses.at(-1)?.[1].name === target_character.name 
+      // TODO: Define and implement CharacterAttributes to avoid short-circuiting
+      const is_game_over = is_game_won || loadedGameState.guesses.length === MAX_GUESSES
       setGuesses(loadedGameState.guesses);
-      setGameOver(loadedGameState.gameOver);
-      setGameWon(loadedGameState.gameWon);
-      setTargetCharacter(loadedGameState.targetCharacter);
-      const default_characters = getAllCharacters();
-      const filtered_characters: Character[] = [];
+      setGameOver(is_game_over);
+      setGameWon(is_game_won);
+      setSeed(loadedGameState.seed)
+    
+      setTargetCharacter(getSeededCharacter(loadedGameState.seed));
 
-      const guessed_characters = loadedGameState.guesses.map(guess => guess[1].value.toLowerCase());
-      for (const character of default_characters) {
-        if (!guessed_characters.includes(character.name.toLowerCase())) {
-          filtered_characters.push(character);
-        }
-      }
-      setAllCharacters(filtered_characters);
+      const guessedNames = loadedGameState.guesses.map((guess) => guess[1].value.toLowerCase());
+      const filteredCharacters = getAllCharacters().filter((c) => !guessedNames.includes(c.name.toLowerCase()));
+      setAllCharacters(filteredCharacters);
 
-      if (!loadedGameState.gameWon && !loadedGameState.gameOver) {
-        const last_guess = loadedGameState.guesses[loadedGameState.guesses.length - 1];
-        if (!last_guess) return;
+      // Set last guessed character's image
+      if (!is_game_over) {
+        const lastGuess = loadedGameState.guesses.at(-1);
+        const lastGuessName = lastGuess?.[1]?.value;
 
-        const last_guess_name = last_guess[1].value;
-
-        let matchedCharacter = undefined;
-        for (const character of default_characters) {
-          if (character.name.toLowerCase() === last_guess_name.toLowerCase()) {
-            matchedCharacter = character;
-            break;
-          }
-        }
-        if (matchedCharacter) {
-          setImageSrc(matchedCharacter.image_full);
-        }
+        const matchedCharacter = getAllCharacters().find((c) => c.name.toLowerCase() === lastGuessName?.toLowerCase());
+        setImageSrc(matchedCharacter?.image_full || "");
       } else {
-        // just set to targetCharacter
-        setImageSrc(loadedGameState.targetCharacter.image_full);
+        setImageSrc(target_character.image_full);
       }
     } else {
       const newTarget = getSeededCharacter();
+      setSeed(getUTCDate());
       setTargetCharacter(newTarget);
       setAllCharacters(getAllCharacters());
     }
   }, []);
 
+  /** Saves game state when game changes */
   useEffect(() => {
     if (targetCharacter) {
-      const gameState: GameState = {
+      saveGameState({
         guesses,
-        gameOver,
-        gameWon,
-        targetCharacter,
-        date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
-      };
-      saveGameState(gameState);
+        date: new Date().toISOString().split("T")[0], // YYYY-MM-DD format
+        seed: seed
+      });
     }
-  }, [guesses, gameOver, gameWon, targetCharacter, allCharacters]);
+  }, [guesses, gameOver, seed, targetCharacter]);
 
-  function updateThresholds() {
-    thresholds = calculateThresholds(targetCharacter!);
-  }
-
+  /** Scrolls to the last guess */
   useEffect(() => {
     if (lastRowRef.current && !reverseTable) {
       setTimeout(() => {
-        lastRowRef.current?.scrollIntoView({ behavior: 'smooth' });
+        lastRowRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 250);
     }
   }, [guesses]);
 
-  const handleSelectCharacter = useCallback((character: Character) => {
-    if (gameOver || guessDisabled) return;
-    setImageSrc(character.image_full);
-    setAllCharacters(allCharacters.filter(c => c.name !== character.name));
+  /** Handles a player's guess selection */
+  const handleSelectCharacter = useCallback(
+    (character: Character) => {
+      if (gameOver || guessDisabled) return;
 
-    setGuessDisabled(true);
+      setImageSrc(character.image_full);
+      setAllCharacters((prev) => prev.filter((c) => c.name !== character.name));
+      setGuessDisabled(true);
 
-    if (!targetCharacter) {
-      console.error("Target character is null.");
-      return;
-    }
+      if (!targetCharacter) {
+        console.error("Target character is null.");
+        return;
+      }
 
-    const guess = {
-      character,
-      target: targetCharacter,
-      thresholds: thresholds
-    }
+      const evaluatedGuesses = evaluateGuess({ character, target: targetCharacter, thresholds });
+      setGuesses((prevGuesses) => [...prevGuesses, evaluatedGuesses]);
 
-    const evaluated_guesses = evaluateGuess(guess);
-    console.log(evaluated_guesses)
-    setGuesses(prevGuesses => [...prevGuesses, evaluated_guesses]); // Use functional update
+      if (evaluatedGuesses.every((attr) => attr.state === "correct")) {
+        setGameWon(true);
+        setGameOver(true);
+        setImageSrc(targetCharacter.image_full);
+      } else if (guesses.length + 1 === MAX_GUESSES) {
+        setGameOver(true);
+        setImageSrc(targetCharacter.image_full);
+      }
 
-    if (evaluated_guesses.every(attr => attr.state === 'correct')) {
-      setGameWon(true);
-      setGameOver(true);
-      setImageSrc(targetCharacter!.image_full);
-    } else if (guesses.length + 1 === MAX_GUESSES) {
-      setGameOver(true);
-      setImageSrc(targetCharacter!.image_full);
-    }
+      setTimeout(() => setGuessDisabled(false), 500);
+    },
+    [gameOver, guessDisabled, guesses, targetCharacter, allCharacters, thresholds]
+  );
 
-    setTimeout(() => {
-      setGuessDisabled(false);
-    }, 500);
-  }, [gameOver, guessDisabled, guesses, targetCharacter, allCharacters, thresholds]); // Correct dependencies
+  /** Resets the game with a new target character */
+  // const handleNewTarget = () => {
+  //   localStorage.removeItem("gameState");
+  //   const new_seed = (Math.random() * 1000).toString();
+  //   setSeed(new_seed)
+  //   const new_target = getSeededCharacter(new_seed);
+  //   calculateThresholds(new_target);
+  //   setTargetCharacter(new_target);
+  //   setAllCharacters(getAllCharacters());
+  //   setGuesses([]);
+  //   setGameOver(false);
+  //   setGameWon(false);
+  //   setImageSrc("");
+  // };
 
-
-  if (!targetCharacter) {
-    return <div>Loading...</div>;
-  }
-
-  const handleNewTarget = () => {
-    localStorage.removeItem('gameState'); // Clear old game state
-    const newTarget = getSeededCharacter();
-    calculateThresholds(newTarget);
-    setTargetCharacter(newTarget);
-    setAllCharacters(getAllCharacters());
-    setGuesses([]);
-    setGameOver(false);
-    setGameWon(false);
-    setImageSrc('');
-  }
+  if (!targetCharacter) return <div>Loading...</div>;
 
   return (
     updateThresholds(),
-    <div className="flex flex-col items-center  min-h-screen relative">
+    <div>
       <HeaderMenu appVersion={APP_VERSION} />
-
-      <GameController
-        imageSrc={imageSrc ?? ''}
-        gameOver={gameOver}
-        gameWon={gameWon}
-        targetCharacter={targetCharacter}
-        guesses={guesses}
-        MAX_GUESSES={MAX_GUESSES}
-        allCharacters={allCharacters}
-        handleSelectCharacter={handleSelectCharacter}
-        guessDisabled={guessDisabled}
-      />
-
-
-      <button
-        onClick={handleNewTarget}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-      >
-        New Target
-      </button>
-
-
-      {guesses.length > 0 && (
-        <>
-          <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
-        </>
-      )}
-
-      <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-        {guesses.length > 0 &&
-          <GuessTable
+      <div className="greedy-packing-row">
+        <div>
+          <GameController
+            imageSrc={imageSrc ?? ''}
+            gameOver={gameOver}
+            gameWon={gameWon}
+            targetCharacter={targetCharacter}
             guesses={guesses}
-            target_guess={targetCharacter}
-            thresholds={thresholds}
-            reverse={reverseTable}
-          />}
-      </div>
+            MAX_GUESSES={MAX_GUESSES}
+            allCharacters={allCharacters}
+            handleSelectCharacter={handleSelectCharacter}
+            guessDisabled={guessDisabled}
+          />
+        </div>
 
+        <div>
+          {guesses.length > 0 && (
+            <>
+              <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
+            </>
+          )}
+
+          <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
+            {guesses.length > 0 &&
+              <GuessTable
+                guesses={guesses}
+                target_guess={targetCharacter}
+                thresholds={thresholds}
+                reverse={reverseTable}
+              />}
+          </div>
+        </div>
+      </div> 
+      {/* <button
+            onClick={handleNewTarget}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md block"
+          >
+            New Target
+      </button> */}
     </div>
   );
 }

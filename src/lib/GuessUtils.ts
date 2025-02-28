@@ -38,39 +38,30 @@ export function EvaluateNumericalGuess(
 
 
 export function evaluateGuess(guess: Guess): Attribute[] {
-  const attributes_to_check = [
-    "code",
-    "alignment",
-    "tendency",
-    "height",
-    "birthplace",
-  ];
-  
-  const result: Attribute[] = [
-    { name: "image", value: guess.character.image, state: guess.character.image === guess.target.image ? 'correct' : 'absent', rank: guess.character.rank },
-    { name: "name", value: guess.character.name, state: guess.character.name === guess.target.name ? 'correct' : 'absent', rank: guess.character.rank },
-  ];
+  const display_attributes = ["image", "name"]
+  const character_attributes = ["code", "alignment", "tendency", "height", "birthplace"];
 
-  attributes_to_check.forEach((key) => {
-    let state: AttributeState = 'absent';
-    let distance_data: GuessDistanceEvaluationResult = getDistanceMeasurements(guess, key);
+  const default_columns: Attribute[] = display_attributes.map((key) => ({
+    name: key,
+    value: guess.character[key],
+    state: guess.character[key] === guess.target[key] ? "correct" : "absent",
+    rank: guess.character.rank,
+  }))
 
-    const value = guess.character[key] ?? '';
-    console.log("guess", guess.character[key]);
+  const character_columns: Attribute[] = character_attributes.map((key) => {
+    const value = guess.character[key];
+    const distance_data = getDistanceMeasurements(guess, key);
+    const state: AttributeState =
+      value === guess.target[key] ? "correct" : distance_data.description === "close" ? "present" : "absent";
 
-
-    if (distance_data && distance_data.description === 'close') {
-    state = 'present';
-    }
-
-    if (value === guess.target[key]) {
-    state = 'correct';
-    }
-    
-    result.push({ name: key, value, state, rank: guess.character.rank});
+    return { 
+      name: key, 
+      value: value, 
+      state: state, 
+      rank: guess.character.rank };
   });
-  
-  return result;
+
+  return [...default_columns, ...character_columns]
 }
 
 export function getDistanceMeasurements(guess: Guess, key: string): GuessDistanceEvaluationResult {
