@@ -52,7 +52,7 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
 
   if (!isMounted) {
     return (
-      <div>Loading...</div>
+      <div>Loading sinners...</div>
     )
   }
 
