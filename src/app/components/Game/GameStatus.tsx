@@ -20,7 +20,6 @@ const GameStatus: React.FC<GameStatusProps> = ({
 	guesses,
 	MAX_GUESSES,
 }) => {
-	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'try' : 'tries'}`;
 	return (
 			<div className="text-center flex flex-col">
 				{gameOver ? (
@@ -29,7 +28,6 @@ const GameStatus: React.FC<GameStatusProps> = ({
 							{gameWon ? 'Congratulations! You won!' : 'Game Over! You lost!'}
 						</h2>
 						<p className="text-lg">The character was {targetCharacter?.name}.</p>
-						<p className="text-lg">You found the sinner in {tries_grammar}.</p>
 					</div>
 				) : (
 					<div>

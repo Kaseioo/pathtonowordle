@@ -13,7 +13,8 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   gameOver,
 }) => {
   const results_header = `Path to Nowhere Wordle #${getDailyGameNumber()}`
-  const results_subheader = `Sinner guessed in ${guesses.length} attempts`
+  const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'attempt' : 'attempts'}`;
+  const results_subheader = `Sinner guessed in ${tries_grammar}.`
 
   const [copySuccess, setCopySuccess] = useState(false);
   const [copySuccessDiscord, setCopySuccessDiscord] = useState(false);
