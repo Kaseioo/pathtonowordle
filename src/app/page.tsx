@@ -35,7 +35,8 @@ export default function Home() {
     const game_to_load = getLastPlayedGame();
     const loaded_game = loadGame(game_to_load);
 
-    const loaded_seed = loaded_game.data.seed;
+    const loaded_seed = game_to_load === "ptndle" ? getUTCDate() : loaded_game.data.seed;
+    
     const loaded_target = getSeededCharacter(loaded_seed);
     const is_game_won = isGameWon(loaded_game.data.guesses, loaded_target.code);
     const is_game_over = isGameOver(loaded_game.data.guesses, loaded_target.code);
