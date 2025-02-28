@@ -19,7 +19,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 	guesses,
 	MAX_GUESSES,
 }) => {
-	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'time' : 'times'}`;
+	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'try' : 'tries'}`;
 	return (
 		<div className="flex flex-col items-center lg:w-1/2 mt-4 lg:mt-0">
 			<div className="text-center">
@@ -29,7 +29,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 							{gameWon ? 'Congratulations! You won!' : 'Game Over! You lost!'}
 						</h2>
 						<p className="text-lg">The character was {targetCharacter?.name}.</p>
-						<p className="text-lg">You tried {tries_grammar}.</p>
+						<p className="text-lg">You found the sinner in {tries_grammar}.</p>
 					</div>
 				) : (
 					<div>
@@ -43,7 +43,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 									src="/images/placeholder.png"
 									alt="Selected Character"
 									width={256}
-									height={576}
+									height={256}
 									className="object-cover h-full rounded-full mx-auto mb-2"
 									unoptimized={true}
 								/>

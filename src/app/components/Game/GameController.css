@@ -1,5 +1,5 @@
 .game-display {
-  @apply flex flex-col sm:flex-row w-full justify-center items-center;
+  @apply flex flex-col sm:flex-row w-full justify-center items-center lg:min-h-[45rem];
 }
 
 .clock-container {
