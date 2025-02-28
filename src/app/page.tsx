@@ -1,10 +1,10 @@
 'use client';
 import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, AvailableGames } from "@/types";
+import { Character, Attribute, AvailableGames, Game } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame } from "@/lib/SaveUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateScore, updateLastPlayed } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
@@ -51,14 +51,15 @@ export default function Home() {
     setSaveOver(is_game_over);
     setSaveAllCharacters(filtered_characters);
     setSaveTarget(loaded_target);
+    updateLastPlayed(loaded_game);
 
-    if (!is_game_over) {
-      if (hasGameStarted(loaded_game.data.guesses)) {
-        const last_character_guessed = getCharacterFromCode(loaded_game.data.guesses[loaded_game.data.guesses.length - 1]);
-        setImageSrc(last_character_guessed.image_full)
-      }
-    } else {
+    if (is_game_over) {
+      updateScore(loaded_game);
       setImageSrc(loaded_target.image_full);
+    } else if (hasGameStarted(loaded_game.data.guesses)) {
+      const last_character_code = loaded_game.data.guesses[loaded_game.data.guesses.length - 1];
+      const last_character_guessed = getCharacterFromCode(last_character_code);
+      setImageSrc(last_character_guessed.image_full)
     }
   }
 
@@ -73,6 +74,7 @@ export default function Home() {
 
       const loaded_game = loadGame(currentGame);
       loaded_game.data.guesses.push(character.code)
+      loaded_game.history[getUTCDate()] = loaded_game.data.guesses
 
       saveGame(loaded_game);
       updateBasedOnSave();
@@ -86,36 +88,36 @@ export default function Home() {
 
   return (
     <>
-        <HeaderMenu appVersion={APP_VERSION} />
-        <div className="greedy-packing-row">
-          <div>
-            <GameController
-              imageSrc={imageSrc ?? ""}
-              gameOver={saveOver}
-              gameWon={saveWon}
-              targetCharacter={saveTarget}
-              guesses={saveGuesses}
-              MAX_GUESSES={MAX_GUESSES}
-              allCharacters={saveAllCharacters}
-              handleSelectCharacter={handleSelectCharacter}
-              guessDisabled={guessDisabled}
-            />
-          </div>
-  
-          <div>
-            {hasGameStarted(saveGuesses) && (
-              <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
-            )}
+      <HeaderMenu appVersion={APP_VERSION} />
+      <div className="greedy-packing-row">
+        <div>
+          <GameController
+            imageSrc={imageSrc ?? ""}
+            gameOver={saveOver}
+            gameWon={saveWon}
+            targetCharacter={saveTarget}
+            guesses={saveGuesses}
+            MAX_GUESSES={MAX_GUESSES}
+            allCharacters={saveAllCharacters}
+            handleSelectCharacter={handleSelectCharacter}
+            guessDisabled={guessDisabled}
+          />
+        </div>
 
-            <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-              {hasGameStarted(saveGuesses) && (
-                <GuessTable
-                  guesses={saveGuesses}
-                  target_guess={saveTarget}
-                  thresholds={calculateThresholds(getSeededCharacter(saveSeed)!)}
-                  reverse={reverseTable}
-                />
-                )}
+        <div>
+          {hasGameStarted(saveGuesses) && (
+            <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
+          )}
+
+          <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
+            {hasGameStarted(saveGuesses) && (
+              <GuessTable
+                guesses={saveGuesses}
+                target_guess={saveTarget}
+                thresholds={calculateThresholds(getSeededCharacter(saveSeed)!)}
+                reverse={reverseTable}
+              />
+            )}
           </div>
         </div>
       </div>
