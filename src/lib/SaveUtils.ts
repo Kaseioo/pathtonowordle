@@ -4,6 +4,7 @@ import { getUTCDate } from "@/lib/GameUtils";
 
 const LOCALSTORAGE_KEY = "user_games";
 const DEFAULT_GAME = "ptndle";
+const FIRST_GAME_DATE = getUTCDate(new Date("2025-02-26"));
 
 /**
  * SAVING OVERVIEW
@@ -186,7 +187,19 @@ function getLastPlayedGame(): AvailableGames {
 	console.log("found games. the most recent game is", game_name);
 
 	return game_name;
+}
 
+/**
+ * Gets the number of days since FIRST_GAME_DATE.
+ * @returns The number of days since the first game.
+ */
+export function getDailyGameNumber(): string {
+	// hour, minute, second, millisecond
+	const division = 24 * 60 * 60 * 1000;
+	const days_elapsed = Math.floor((Date.now() - new Date(FIRST_GAME_DATE).getTime()) / division);
+	const daily_game_number = days_elapsed + 1;
+
+	return daily_game_number.toString();
 }
 
 export {
