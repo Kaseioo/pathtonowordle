@@ -25,6 +25,7 @@ export default {
       colors: {
         background: "black",
         foreground: "var(--foreground)",
+        "foreground-highlight": "var(--foregroundHighlight)",
         "s1n-border": "#2b2b2b",
         bloodred: "var(--bloodred)",
         "class-Z-sinner": "var(--class-Z-sinner)",

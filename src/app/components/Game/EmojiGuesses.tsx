@@ -1,6 +1,7 @@
 // EmojiGuesses.tsx
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { Attribute } from '@/types';
+import { getDailyGameNumber } from '@/lib/SaveUtils';
 
 interface EmojiGuessesProps {
   guesses: Array<Array<Attribute>>;  // Array of arrays, each inner array is a guess
@@ -11,7 +12,11 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   guesses,
   gameOver,
 }) => {
+  const results_header = `Path to Nowhere Wordle #${getDailyGameNumber()}`
+  const results_subheader = `Sinner guessed in ${guesses.length} attempts`
+
   const [copySuccess, setCopySuccess] = useState(false);
+  const [copySuccessDiscord, setCopySuccessDiscord] = useState(false);
   const copyRef = useRef<HTMLDivElement>(null); // Ref for the container to copy
 
   // Use useMemo to calculate the emojis array.  This is efficient and avoids
@@ -48,11 +53,27 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   const handleCopyClick = useCallback(() => {
     const textToCopy = emojis.map(row => row.join('')).join('\n');
 
+    copyToClipboard(textToCopy);
+  }, [emojis, setCopySuccess]);
+
+  const handleCopyDiscordClick = useCallback(() => {
+    const textToCopy = [">>> " + results_header, results_subheader, ...emojis.map(row => '' + row.join(''))].join('\n');
+
+    copyToClipboard(textToCopy, "discord");
+
+  }, [emojis, setCopySuccessDiscord]);
+
+  function copyToClipboard(textToCopy: string, copyType: string = "clipboard") {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          setCopySuccess(true);
-          setTimeout(() => setCopySuccess(false), 2000);
+          if (copyType === 'discord') {
+            setCopySuccessDiscord(true);
+            setTimeout(() => setCopySuccessDiscord(false), 2000);
+          } else {
+            setCopySuccess(true);
+            setTimeout(() => setCopySuccess(false), 2000);
+          }
         })
         .catch(err => {
           console.error('Failed to copy text: ', err);
@@ -61,7 +82,7 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
       console.warn('Clipboard API not supported in this context.');
       alert('Copying is not supported in this browser or environment. Please use HTTPS.');
     }
-  }, [emojis, setCopySuccess]); 
+  }
 
   const renderEmojis = () => (
     <div ref={copyRef}>
@@ -77,15 +98,28 @@ const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
 
   return (
     <div className="mt-4">
+      <div className="text-center">
+        <h2 className="text-xl font-bold">{results_header}</h2>
+        <p className="text-lg">{results_subheader}</p>
+      </div>
       {renderEmojis()}
       {gameOver && (
-        <button
-          onClick={handleCopyClick}
-          className={`mt-4 px-4 py-2 rounded ${copySuccess ? 'bg-green-500 text-white' : 'bg-blue-500 hover:bg-blue-700 text-white'}`}
-          disabled={copySuccess}
-        >
-          {copySuccess ? 'Copied!' : 'Copy Results'}
-        </button>
+        <>
+          <button
+            onClick={handleCopyClick}
+            className={`mt-4 mx-2 px-4 py-2 rounded border border-foreground-highlight ${copySuccess ? 'bg-green-500 text-white' : 'bg-foreground hover:bg-foreground-highlight text-white'}`}
+            disabled={copySuccess}
+          >
+            {copySuccess ? 'Copied!' : 'Copy emojis'}
+          </button>
+          <button
+            onClick={handleCopyDiscordClick}
+            className={`mt-4 mx-2 px-4 py-2 rounded border border-foreground-highlight ${copySuccessDiscord ? 'bg-green-500 text-white' : 'bg-foreground hover:bg-foreground-highlight text-white'}`}
+            disabled={copySuccessDiscord}
+          >
+            {copySuccessDiscord ? 'Copied!' : 'Copy to discord'}
+          </button>
+        </>
       )}
     </div>
   );
