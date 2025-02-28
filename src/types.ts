@@ -42,12 +42,6 @@ export type Guess = {
   thresholds: Thresholds;
 }
 
-export type GameState = {
-  guesses: Attribute[][]; // Why is this storing attributes instead of characters??
-  date: string; // Date string (YYYY-MM-DD)
-  seed: string; // Seed for cheating prevention
-};
-
 export type AvailableGames = "ptndle" | "ptndle_endless";
 
 export type Game = {
