@@ -37,6 +37,10 @@ export function getCharacterListWithoutGuesses(guesses: string[]): Character[] {
 	return characters.filter(character => !guesses.includes(character.code));
 }
 
+export function hasGameStarted(guesses: string[] | Attribute[][]): boolean {
+  return guesses.length > 0;
+}
+
 
 export function getLegacyGuessesFromCodes(codes: string[], seed: string = getUTCDate()): Attribute[][] {
   const characters = getCharactersFromCodes(codes);

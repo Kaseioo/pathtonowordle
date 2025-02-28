@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import EmojiGuesses from './EmojiGuesses';
 import { Attribute } from '@/types';
+import { hasGameStarted } from '@/lib/GameUtils';
 
 interface GameStatusProps {
 	gameOver: boolean;
@@ -34,7 +35,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 				) : (
 					<div>
 						<h2 className="text-2xl font-bold">Path to Nowordle</h2>
-						{guesses.length === 0 ? (
+						{hasGameStarted(guesses) ? (
 							<>
 								<p className="text-lg mb-2">
 									Try to find the daily Sinner.

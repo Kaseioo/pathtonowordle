@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
-import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses } from "@/lib/GameUtils";
+import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
 import { saveGame, loadGame, getLastPlayedGame } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
@@ -52,7 +52,7 @@ export default function Home() {
     setSaveTarget(loaded_target);
 
     if (!is_game_over) {
-      if (loaded_game.data.guesses.length > 0) {
+      if (hasGameStarted(loaded_game.data.guesses)) {
         const last_character_guessed = getCharacterFromCode(loaded_game.data.guesses[loaded_game.data.guesses.length - 1]);
         setImageSrc(last_character_guessed.image_full)
       }
@@ -100,12 +100,12 @@ export default function Home() {
           guessDisabled={guessDisabled}
         />
 
-        {saveGuesses.length > 0 && (
+        {hasGameStarted(saveGuesses) && (
           <TableHeader attributeKeys={ATTRIBUTE_KEYS} reversed={reverseTable} onReverseChange={handleReverseChange} />
         )}
 
         <div className="flex flex-col mt-1 lg:mt-4" ref={lastRowRef}>
-          {saveGuesses.length > 0 && (
+          {hasGameStarted(saveGuesses) && (
             <GuessTable
               guesses={saveGuesses}
               target_guess={saveTarget}
