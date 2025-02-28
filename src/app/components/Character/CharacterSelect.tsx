@@ -49,7 +49,9 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
   }, []);
 
   if (!isMounted) {
-    return null;
+    return (
+      <div>Loading...</div>
+    )
   }
 
 
