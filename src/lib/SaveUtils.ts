@@ -97,7 +97,6 @@ function calculateScore(game: Game): void {
 	).length;
 
 	game.scoring.total_wins = total_wins;
-	console.log("updating score", total_wins);
 
 	saveGame(game);
 }
@@ -255,7 +254,6 @@ function getLastPlayedGame(): AvailableGames {
 	const games = getAllGames();
 
 	if (!doesUserHaveGames(games)) {
-		console.log("since games is empty, returning default value");
 		return game_name;
 	}
 
@@ -268,8 +266,6 @@ function getLastPlayedGame(): AvailableGames {
 			game_name = game.name;
 		}
 	}
-
-	console.log("found games. the most recent game is", game_name);
 
 	return game_name;
 }
