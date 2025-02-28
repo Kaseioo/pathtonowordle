@@ -26,7 +26,7 @@ export function EvaluateNumericalGuess(
     const distance_from_target = Math.abs(guessed_value - target_value);
 
     if (distance_from_target == 0)                             return {comparison: undefined, description: "correct"};
-    if (distance_from_target < threshold)                      return {comparison: "≅", description: "close"};
+    if (distance_from_target <= threshold)                      return {comparison: "≅", description: "close"};
     if (is_positive && distance_from_target > far_threshold)   return {comparison: "↑↑", description: "much higher"};
     if (is_positive && distance_from_target <= far_threshold)  return {comparison: "↑", description: "higher"};
     if (!is_positive && distance_from_target > far_threshold)  return {comparison: "↓↓", description: "much lower"};

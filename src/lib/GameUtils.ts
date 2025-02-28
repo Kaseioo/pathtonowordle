@@ -1,5 +1,12 @@
 // src/lib/GameUtils.ts
-import { GameState } from "@/types";
+import { Character, Attribute, Guess } from "@/types";
+import {
+	getAllCharacters,
+	getSeededCharacter,
+	calculateThresholds,
+	getCharacterFromCode,
+} from "@/lib/CharacterUtils";
+import { evaluateGuess } from "@/lib/GuessUtils";
 
 // Maximum guesses allowed
 export const MAX_GUESSES = 6;
@@ -7,30 +14,54 @@ export const MAX_GUESSES = 6;
 // Attribute keys used in the table
 export const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
 
-/**
- * Saves the game state to local storage.
- */
-export const saveGameState = (gameState: GameState) => {
-  localStorage.setItem("gameState", JSON.stringify(gameState));
-};
+export function getUTCDate(date: Date = new Date()): string {
+  return date.toISOString().split("T")[0];
+}
 
-/**
- * Loads the game state from local storage if it's from today. 
- * Creates a new one otherwise.
- */
-export const loadGameState = (): GameState | null => {
-  const savedState = localStorage.getItem("gameState");
-  if (!savedState) return null;
+export function isGameWon(guesses: string[], target: string): boolean {
+	return guesses.includes(target);
+}
 
-  const gameState: GameState = JSON.parse(savedState);
-  const savedDate = new Date(gameState.date).toISOString().split("T")[0];
-  const currentDate = new Date().toISOString().split("T")[0];
+export function isGameOver(guesses: string[], target: string): boolean {
+	if (isGameWon(guesses, target)) return true;
+	return guesses.length >= MAX_GUESSES;
+}
 
-  if (savedDate === currentDate) {
-    return gameState;
-  } else {
-    localStorage.removeItem("gameState");
-    return null;
+export function getCharactersFromCodes(guesses: string[]): Character[] {
+	return guesses.map(guess => getCharacterFromCode(guess));
+}
+
+export function getCharacterListWithoutGuesses(guesses: string[]): Character[] {
+	const characters = getAllCharacters();
+  
+	return characters.filter(character => !guesses.includes(character.code));
+}
+
+export function hasGameStarted(guesses: string[] | Attribute[][]): boolean {
+  return guesses.length > 0;
+}
+
+
+export function getLegacyGuessesFromCodes(codes: string[], seed: string = getUTCDate()): Attribute[][] {
+  const characters = getCharactersFromCodes(codes);
+  const target = getSeededCharacter(seed);
+  const thresholds = calculateThresholds(target);
+
+  const legacy_guesses = [];
+  
+  for (const character of characters) {
+    const guess: Guess = {
+      character: character,
+      target: target,
+      thresholds: thresholds,
+    };
+
+    legacy_guesses.push(evaluateGuess(guess));
   }
-};
+
+  return legacy_guesses;
+
+}
+	
+	
 

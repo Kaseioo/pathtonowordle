@@ -1,7 +1,8 @@
 // src/app/components/CharacterSelect.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { Character, CharacterRank } from '@/types';
+import { useState } from 'react';
 import CharacterPreview from '@/components/Character/CharacterPreview';
 
 interface Props {
@@ -17,6 +18,7 @@ interface OptionType {
 }
 
 const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) => {
+  const [isMounted, setIsMounted] = useState(false);
   const options: OptionType[] = characters.map((character) => ({
     value: character.name,
     label: character.name,
@@ -42,8 +44,22 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
     </>
   );
 
+
+  // makes rendering client-side only
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
+
   return (
     <Select
+      id='sinner-select'
       options={options}
       onChange={(selectedOption) => {
         if (selectedOption) {

@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import EmojiGuesses from './EmojiGuesses';
 import { Attribute } from '@/types';
+import { hasGameStarted } from '@/lib/GameUtils';
 
 interface GameStatusProps {
 	gameOver: boolean;
@@ -19,7 +20,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 	guesses,
 	MAX_GUESSES,
 }) => {
-	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'time' : 'times'}`;
+	const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'try' : 'tries'}`;
 	return (
 			<div className="text-center flex flex-col">
 				{gameOver ? (
@@ -28,21 +29,25 @@ const GameStatus: React.FC<GameStatusProps> = ({
 							{gameWon ? 'Congratulations! You won!' : 'Game Over! You lost!'}
 						</h2>
 						<p className="text-lg">The character was {targetCharacter?.name}.</p>
-						<p className="text-lg">You tried {tries_grammar}.</p>
+						<p className="text-lg">You found the sinner in {tries_grammar}.</p>
 					</div>
 				) : (
 					<div>
 						<h2 className="text-2xl font-bold">Path to Nowordle</h2>
-						{guesses.length === 0 ? (
+						{!hasGameStarted(guesses) ? (
 							<>
 								<p className="text-lg mb-2">
-									Try to find the daily Sinner based on their characteristics.
+									Try to find the daily Sinner.
 								</p>
+								<p className="text-md mb-2">
+								Press the ? button on the top left corner to learn how to play.
+								</p>
+								
 								<Image
 									src="/images/placeholder.png"
 									alt="Selected Character"
 									width={256}
-									height={576}
+									height={256}
 									className="object-cover h-full rounded-full mx-auto mb-2"
 									unoptimized={true}
 								/>

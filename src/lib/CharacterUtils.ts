@@ -5,6 +5,7 @@ import {
   Thresholds,
 } from "@/types";
 import characterData from "@/character_data/characters.json";
+import { getUTCDate } from "@/lib/GameUtils";
 
 const DEFAULT_CHARACTERS: Character[] = characterData as Character[];
 
@@ -16,8 +17,17 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   return seeded_character;
 }
 
-export function getUTCDate(date: Date = new Date()): string {
-  return date.toISOString().split("T")[0];
+export function getCharacterFromCode(code: string): Character {
+  const foundCharacter = DEFAULT_CHARACTERS.find(
+    (character) => character.code === code
+  );
+
+  if (!foundCharacter) {
+    throw new Error(`Character with code ${code} not found.`);
+  }
+  
+  return foundCharacter;
+
 }
 
 // 2025-02-23
