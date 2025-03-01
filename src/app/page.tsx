@@ -1,7 +1,7 @@
 'use client';
 import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, AvailableGames, Game } from "@/types";
+import { Character, Attribute, AvailableGames } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
 import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores, createNewDailyGame } from "@/lib/SaveUtils";
