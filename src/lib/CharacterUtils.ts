@@ -13,7 +13,6 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   const seed = cyrb53(date);
   const index = seed % DEFAULT_CHARACTERS.length;
   const seeded_character = DEFAULT_CHARACTERS[index];
-  console.log(seeded_character);
   return seeded_character;
 }
 

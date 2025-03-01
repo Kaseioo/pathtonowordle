@@ -6,15 +6,19 @@ import { getDailyGameNumber } from '@/lib/SaveUtils';
 interface EmojiGuessesProps {
   guesses: Array<Array<Attribute>>;  // Array of arrays, each inner array is a guess
   gameOver: boolean;
+  gameWon: boolean;
 }
 
 const EmojiGuesses: React.FC<EmojiGuessesProps> = ({
   guesses,
   gameOver,
+  gameWon
 }) => {
   const results_header = `Path to Nowhere Wordle #${getDailyGameNumber()}`
   const tries_grammar = `${guesses.length} ${guesses.length === 1 ? 'attempt' : 'attempts'}`;
-  const results_subheader = `Sinner guessed in ${tries_grammar}.`
+  const win_grammar =  `${gameWon ? 'detained in' : 'escaped after'}`
+  
+  const results_subheader = `Sinner ${win_grammar} ${tries_grammar}.`
 
   const [copySuccess, setCopySuccess] = useState(false);
   const [copySuccessDiscord, setCopySuccessDiscord] = useState(false);
