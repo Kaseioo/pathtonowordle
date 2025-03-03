@@ -5,7 +5,7 @@ import { getSeededCharacter } from "./CharacterUtils";
 
 const LOCALSTORAGE_KEY = "user_games";
 const DEFAULT_GAME = "ptndle";
-const FIRST_GAME_DATE = getUTCDate(new Date("2025-02-26"));
+const FIRST_GAME_DATE = getUTCDate(new Date("2025-03-01"));
 
 /**
  * SAVING OVERVIEW
@@ -71,6 +71,21 @@ function updateLastPlayed(game: Game): void {
 
 	game.dates.last_played = last_played;
 	saveGame(game);
+}
+
+function createNewDailyGame(game_name: AvailableGames): Game {
+	const game: Game = findGame(game_name);
+	const today = getUTCDate();
+
+	if (game.history[today]) {
+		return structuredClone(game);
+	}
+	
+	game.history[today] = [];
+	game.data.seed = today;
+	game.data.guesses = game.history[today];
+
+	return structuredClone(game);
 }
 
 /**
@@ -293,4 +308,5 @@ export {
 	getLastPlayedGame,
 	getAllGames,
 	updateScores,
+	createNewDailyGame
 };
