@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames, Game } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores } from "@/lib/SaveUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores, createNewDailyGame } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
@@ -33,9 +33,9 @@ export default function Home() {
 
   function updateBasedOnSave() {
     const game_to_load = getLastPlayedGame();
-    const loaded_game = loadGame(game_to_load);
+    const loaded_game = game_to_load === "ptndle" ? createNewDailyGame(game_to_load) : loadGame(game_to_load);
 
-    const loaded_seed = game_to_load === "ptndle" ? getUTCDate() : loaded_game.data.seed;
+    const loaded_seed = loaded_game.data.seed
     
     const loaded_target = getSeededCharacter(loaded_seed);
     const is_game_won = isGameWon(loaded_game.data.guesses, loaded_target.code);

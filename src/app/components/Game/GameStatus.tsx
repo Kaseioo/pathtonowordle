@@ -49,7 +49,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 							<tr>
 								<td className="py-2 px-1 font-bold border-r border-[theme(colors.s1n-border)]">{game.scoring.total_wins}</td>
 								<td className="py-2 px-1 border-r border-[theme(colors.s1n-border)]">{game.scoring.streak}</td>
-								<td className="py-2 px-1">{game.scoring.total_wins}</td>
+								<td className="py-2 px-1">{game.scoring.high_score}</td>
 							</tr>
 						</tbody>
 					</table>
