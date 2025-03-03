@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores, createNewDailyGame } from "@/lib/SaveUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores, createNewDailyGame, switchMostRecentGame } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
@@ -27,33 +27,43 @@ export default function Home() {
   const [saveWon, setSaveWon] = useState<boolean>(false);
   const [saveOver, setSaveOver] = useState<boolean>(false);
   const [saveAllCharacters, setSaveAllCharacters] = useState<Character[]>([]);
+  const [is_endless_mode_on, setIsEndlessModeOn] = useState(false);
+  const [hasGameLoaded, setHasGameLoaded] = useState(false);
+
 
   /** Toggles table order */
   const handleReverseChange = (newReverse: boolean) => setReverseTable(newReverse);
 
   function updateBasedOnSave() {
     const game_to_load = getLastPlayedGame();
-    const loaded_game = game_to_load === "ptndle" ? createNewDailyGame(game_to_load) : loadGame(game_to_load);
+    const loaded_game = game_to_load === "ptndle" ? createNewDailyGame(game_to_load) : loadGame(game_to_load); 
+    const is_loaded_endless_mode_on = game_to_load === "ptndle_endless";
 
+    const endless_seed_modifier = loaded_game.history.length ?? 0;
+    const endless_seed = loaded_game.data.seed + "_" + endless_seed_modifier;
     const loaded_seed = loaded_game.data.seed
     
-    const loaded_target = getSeededCharacter(loaded_seed);
+    const loaded_target = is_loaded_endless_mode_on ? getSeededCharacter(endless_seed) : getSeededCharacter(loaded_seed);
     const is_game_won = isGameWon(loaded_game.data.guesses, loaded_target.code);
     const is_game_over = isGameOver(loaded_game.data.guesses, loaded_target.code);
-    const legacy_guesses = getLegacyGuessesFromCodes(loaded_game.data.guesses);
+    const legacy_guesses = getLegacyGuessesFromCodes(loaded_game.data.guesses, loaded_seed);
 
     const filtered_characters = getCharacterListWithoutGuesses(loaded_game.data.guesses);
 
+    
     setCurrentGame(loaded_game.name);
     setSaveGuesses(legacy_guesses);
-    setSaveSeed(loaded_game.data.seed);
+    setSaveSeed(loaded_seed);
     setSaveTarget(loaded_target);
     setSaveWon(is_game_won);
     setSaveOver(is_game_over);
     setSaveAllCharacters(filtered_characters);
     setSaveTarget(loaded_target);
-    updateLastPlayed(loaded_game);
-
+    setHasGameLoaded(true);
+    setIsEndlessModeOn(is_loaded_endless_mode_on);
+    
+    if(is_endless_mode_on) loaded_game.data.seed = endless_seed;
+    
     if (is_game_over) {
       updateScores(loaded_game);
       setImageSrc(loaded_target.image_full);
@@ -61,13 +71,25 @@ export default function Home() {
       const last_character_code = loaded_game.data.guesses[loaded_game.data.guesses.length - 1];
       const last_character_guessed = getCharacterFromCode(last_character_code);
       setImageSrc(last_character_guessed.image_full)
+    } else { // game has not started yet, so we aren't going to show anything
+      setImageSrc("");
     }
   }
 
-  // initial game load
   useEffect(() => {
     updateBasedOnSave();
   }, []);
+  
+  useEffect(() => {
+    if(!hasGameLoaded) return;
+    if (is_endless_mode_on) {
+      switchMostRecentGame("ptndle_endless");
+      updateBasedOnSave();
+    } else {
+      switchMostRecentGame("ptndle");
+      updateBasedOnSave();
+    }
+  }, [is_endless_mode_on, hasGameLoaded]);
 
   const handleSelectCharacter = useCallback(
     (character: Character) => {
@@ -85,11 +107,15 @@ export default function Home() {
     [guessDisabled]
   );
 
+  const onToggleEndlessMode = useCallback(() => {
+    setIsEndlessModeOn(!is_endless_mode_on);
+  }, [is_endless_mode_on]);
+
   if (!saveTarget) return <div>Loading...</div>;
 
   return (
     <>
-      <HeaderMenu appVersion={APP_VERSION} />
+      <HeaderMenu appVersion={APP_VERSION} onToggleEndlessMode={onToggleEndlessMode} is_endless_mode_on={is_endless_mode_on}/>
       <div className="greedy-packing-row">
         <div>
           <GameController
