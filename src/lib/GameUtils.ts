@@ -7,6 +7,7 @@ import {
 	getCharacterFromCode,
 } from "@/lib/CharacterUtils";
 import { evaluateGuess } from "@/lib/GuessUtils";
+import { loadGame, getDebugValue, setDebugValue, saveGame } from "./SaveUtils";
 
 // Maximum guesses allowed
 export const MAX_GUESSES = 6;
@@ -14,7 +15,9 @@ export const MAX_GUESSES = 6;
 // Attribute keys used in the table
 export const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
 
-export function getUTCDate(date: Date = new Date()): string {
+export function getUTCDate(date: Date = new Date(), full_date: boolean = false): string {
+  if (full_date) return date.toISOString();
+
   return date.toISOString().split("T")[0];
 }
 
@@ -39,6 +42,29 @@ export function getCharacterListWithoutGuesses(guesses: string[]): Character[] {
 
 export function hasGameStarted(guesses: string[] | Attribute[][]): boolean {
   return guesses.length > 0;
+}
+
+export function createEndlessResetValue(): void {
+  const loaded_game = loadGame("ptndle_endless");
+
+  const does_endless_reset_exist = getDebugValue(loaded_game, "endless_reset");
+
+  if (!does_endless_reset_exist) {
+    setDebugValue(loaded_game, "endless_reset", "false");
+  }
+}
+
+export function updateEndlessMode(): void {
+  const game = loadGame("ptndle_endless");
+  const previous_daily_endless_count = getDebugValue(game, "daily_endless_count") ?? 0;
+  const previous_daily_endless_count_number = parseInt(previous_daily_endless_count);
+
+  
+  setDebugValue(game, "daily_endless_count", String(previous_daily_endless_count_number + 1));
+  setDebugValue(game, "endless_reset", "true");
+  
+  game.data.guesses = [];
+  saveGame(game);
 }
 
 
