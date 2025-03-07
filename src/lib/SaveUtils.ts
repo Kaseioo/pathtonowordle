@@ -89,7 +89,7 @@ function setDebugValue(game: Game, key: string, value: string): void {
 function getDebugValue(game: Game, key: string): string {
 	const debug_info = game.debug_info ? JSON.parse(game.debug_info) : {};
 
-	return debug_info[key] ?? "";
+	return debug_info[key];
 }
 
 /**
