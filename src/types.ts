@@ -48,7 +48,7 @@ export type Game = {
   name: AvailableGames;
   dates: {
     first_played: string;
-    last_played: string;
+    last_played: string; // should be a full ISO date string
   };
   scoring: {
     streak: number;
