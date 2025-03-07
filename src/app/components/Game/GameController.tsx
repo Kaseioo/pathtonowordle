@@ -6,6 +6,7 @@ import { Attribute, Character } from '@/types';
 import GameImageDisplay from '@/components/Game/GameImageDisplay';
 import '@/components/Game/GameController.css'
 import CountdownClock from '@/components/CountdownClock';
+import Image from 'next/image';
 
 interface GameControllerProps {
 	imageSrc: string;
@@ -15,7 +16,9 @@ interface GameControllerProps {
 	guesses: Attribute[][];
 	MAX_GUESSES: number;
 	allCharacters: Character[];
+	isEndlessOn: boolean;
 	handleSelectCharacter: (character: Character) => void;
+	handleEndlessReset: () => void;
 	guessDisabled: boolean;
 }
 
@@ -27,7 +30,9 @@ const GameController: React.FC<GameControllerProps> = ({
 	guesses,
 	MAX_GUESSES,
 	allCharacters,
+	isEndlessOn,
 	handleSelectCharacter,
+	handleEndlessReset,
 	guessDisabled,
 }) => {
 	const current_date = new Date(new Date().toUTCString());
@@ -48,6 +53,8 @@ const GameController: React.FC<GameControllerProps> = ({
 					{gameFinished && (
 						<CountdownClock nextDate={next_date} />
 					)}
+
+
 					{!gameFinished && (
 						<CharacterSelect
 							characters={allCharacters}
@@ -55,6 +62,24 @@ const GameController: React.FC<GameControllerProps> = ({
 							disabled={guessDisabled}
 						/>
 					)}
+					{gameFinished && isEndlessOn && (
+						<div className="flex flex-col mt-4 items-center justify-center bg-s1n-gradient w-full border border-foreground-highlight">
+							<Image
+								src={"/images/ptn_infinity_bloodred.svg"}
+								alt="Endless Mode"
+								width={48}
+								height={48}
+								className="flex"
+							/>
+							<button
+								className={`flex w-full h-16 mx-4 items-center justify-center bg-foreground hover:bg-foreground-highlight`}
+								onClick={handleEndlessReset}
+							>
+								Play Again
+							</button>
+						</div>
+					)}
+
 				</div>
 			</div>
 		</div>
