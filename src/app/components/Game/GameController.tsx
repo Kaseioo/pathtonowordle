@@ -62,7 +62,7 @@ const GameController: React.FC<GameControllerProps> = ({
 							disabled={guessDisabled}
 						/>
 					)}
-					{gameFinished && isEndlessOn && (
+					{isEndlessOn && (
 						<div className="flex flex-col mt-4 items-center justify-center bg-s1n-gradient w-full border border-foreground-highlight">
 							<Image
 								src={"/images/ptn_infinity_bloodred.svg"}
@@ -71,12 +71,20 @@ const GameController: React.FC<GameControllerProps> = ({
 								height={48}
 								className="flex"
 							/>
-							<button
-								className={`flex w-full h-16 mx-4 items-center justify-center bg-foreground hover:bg-foreground-highlight`}
-								onClick={handleEndlessReset}
-							>
-								Play Again
-							</button>
+							{gameFinished ? (
+								<>
+									<button
+										className={`flex w-full h-16 mx-4 items-center justify-center bg-foreground hover:bg-foreground-highlight`}
+										onClick={handleEndlessReset}
+									>
+										Play Again
+									</button>
+								</>
+							) : (
+								<div className="flex w-full h-8 mx-4 items-center justify-center">
+									Endless Mode is enabled.
+								</div>
+							)}
 						</div>
 					)}
 
