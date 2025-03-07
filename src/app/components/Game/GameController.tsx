@@ -90,6 +90,12 @@ const GameController: React.FC<GameControllerProps> = ({
 
 				</div>
 			</div>
+			<div className="mb-0 mt-2 mr-2 flex items-end justify-center bg-opacity-50 rounded-md">
+				<span className="text-xs text-gray-200">
+					Found something wrong? &nbsp;
+					<a href="https://github.com/Kaseioo/pathtonowordle/issues" target="_blank" rel="noopener noreferrer" className="underline">Report on GitHub.</a>
+				</span>
+			</div>
 		</div>
 	);
 };
