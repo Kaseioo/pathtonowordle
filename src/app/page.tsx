@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Character, Attribute, AvailableGames } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted, createEndlessResetValue, updateEndlessMode } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame, updateLastPlayed, updateScores, createNewDailyGame, switchMostRecentGame, setDebugValue, getDebugValue } from "@/lib/SaveUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateScores, createNewDailyGame, switchMostRecentGame, setDebugValue, getDebugValue } from "@/lib/SaveUtils";
 import GameController from "@/components/Game/GameController";
 import GuessTable from "@/components/Table/GuessTable";
 import HeaderMenu from "@/app/components/HeaderMenu";
