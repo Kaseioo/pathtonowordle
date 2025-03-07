@@ -1,7 +1,7 @@
 'use client';
 import '@/styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, AvailableGames } from "@/types";
+import { Character, Attribute, AvailableGames, APP_VERSION } from "@/types";
 import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted, createEndlessResetValue, updateEndlessMode } from "@/lib/GameUtils";
 import { saveGame, loadGame, getLastPlayedGame, updateScores, createNewDailyGame, switchMostRecentGame, setDebugValue, getDebugValue } from "@/lib/SaveUtils";
@@ -12,7 +12,6 @@ import TableHeader from "@/components/Table/TableHeader";
 
 const MAX_GUESSES = 6;
 const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];
-const APP_VERSION = "beta v1.2.617";
 
 export default function Home() {
   const [guessDisabled, setGuessDisabled] = useState(false);
