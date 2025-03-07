@@ -1,5 +1,5 @@
 // src/app/components/CharacterSelect.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Select from 'react-select';
 import { Character, CharacterRank } from '@/types';
 import { useState } from 'react';
@@ -18,7 +18,12 @@ interface OptionType {
 }
 
 const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) => {
+
   const [isMounted, setIsMounted] = useState(false);
+  const [selectLabel, setSelectLabel] = useState('Select a Sinner');
+  const block_character_update = useRef(false);
+
+
   const options: OptionType[] = characters.map((character) => ({
     value: character.name,
     label: character.name,
@@ -50,6 +55,16 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    if(block_character_update.current) {
+      block_character_update.current = false;
+      return;
+    };
+    console.log("characters changed. updating...")
+    setSelectLabel(`Please select a Sinner.`);
+  }, [characters]);
+  
+
   if (!isMounted) {
     return (
       <div>Loading sinners...</div>
@@ -63,12 +78,15 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
       options={options}
       onChange={(selectedOption) => {
         if (selectedOption) {
+          block_character_update.current = true;
           onSelect(selectedOption.character);
+          setSelectLabel(`You have selected ${selectedOption.label}. Press to select another Sinner.`);
+          console.log("change detected");
         }
       }}
       formatOptionLabel={formatOptionLabel}
       isSearchable={true}
-      placeholder="Select a Sinner"
+      placeholder={selectLabel}
       isDisabled={disabled}
       className="mb-4 flex justify-center"
       classNamePrefix="sinner-select"
@@ -124,19 +142,10 @@ const CharacterSelect: React.FC<Props> = ({ characters, onSelect, disabled }) =>
         },
       }}
       components={{
-        SingleValue: ({ data }) =>
+        SingleValue: () =>
           <div className="">
-            <CharacterPreview
-              characterRank={data.character.rank as CharacterRank}
-              displayValue={data.character.image}
-              character_name={data.character.name}
-              width={32}
-              height={32}
-              miniature={true}
-              disable_highlight={true}
-            />
-            <span className="text-gray-400 hover:text-white transition-colors duration-200 max-w-[296.6]">
-              You have selected {data.label}. Press to select another Sinner.
+            <span className="flex text-justify text-gray-300 hover:text-white transition-colors duration-200 max-w-[296.6]">
+              {selectLabel}
             </span>
           </div>
       }}

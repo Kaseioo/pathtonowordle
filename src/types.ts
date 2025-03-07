@@ -1,4 +1,8 @@
 // src/types.ts
+import packageJson from '../package.json';
+
+// dirty hack while we don't have environment variables
+export const APP_VERSION: string = packageJson.version;
 
 export type AttributeState = "absent" | "present" | "correct" | "empty";
 export type CharacterRank = "S" | "A" | "B";
@@ -48,7 +52,7 @@ export type Game = {
   name: AvailableGames;
   dates: {
     first_played: string;
-    last_played: string;
+    last_played: string; // should be a full ISO date string
   };
   scoring: {
     streak: number;

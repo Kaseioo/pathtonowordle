@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Path To Nowordle",
-  description: "A very nice wordle-like character guesser inspired by Genshindle. Awawawa.",
+  description: "A genshindle-inspired character guesser game based on Path to Nowhere.",
 };
 
 export default function RootLayout({
