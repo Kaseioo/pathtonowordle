@@ -1,13 +1,23 @@
 // src/components/HeaderMenu.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import InstructionModal from './Modal/InstructionModal';
 
 interface HeaderMenuProps {
 	appVersion: string;
+	is_endless_mode_on: boolean;
+	onToggleEndlessMode: () => void;
 }
 
-const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion }) => {
+const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion, is_endless_mode_on, onToggleEndlessMode }) => {
+	const endless_on = "/images/ptn_infinity_bloodred.svg";
+	const endless_off = "/images/ptn_infinity.svg";
+	const [endless_image, setEndlessImage] = useState(is_endless_mode_on ? endless_on : endless_off);
+
+	useEffect(() => {
+		setEndlessImage(is_endless_mode_on ? endless_on : endless_off);
+	}, [is_endless_mode_on]);
+
 	return (
 		<div className="mb-8 top-0 left-0 w-full h-12 bg-gradient-to-r from-gray-500/10 to-black text-white flex items-center justify-between px-4">
 			<div>
@@ -16,6 +26,21 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion }) => {
 					<InstructionModal
 						className="mx-2 w-6 h-6 inline"
 					/>
+				</span>
+				<span>
+				<button
+					onClick={onToggleEndlessMode}
+					className="mx-2 relative -top-0.5"
+				>
+					<Image
+						src={endless_image}
+						alt="Endless Mode"
+						width={48} 
+						height={48}
+						className="inline"
+					/>
+					
+				</button>
 				</span>
 			</div>
 			<div>

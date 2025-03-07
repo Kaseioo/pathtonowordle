@@ -1,6 +1,6 @@
 {
   "name": "ptwordle",
-  "version": "1.2.617",
+  "version": "beta v2025.3.7",
   "private": true,
   "scripts": {
     "dev": "next dev",

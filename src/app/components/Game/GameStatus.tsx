@@ -55,7 +55,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
 					</table>
 					<div>
 					</div>
-					<p className="text-lg">Today's sinner is {targetCharacter?.name}.</p>
+					<p className="text-lg">Today&apos;s sinner is {targetCharacter?.name}.</p>
 				</div>
 			) : (
 				<div>
