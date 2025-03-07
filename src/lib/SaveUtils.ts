@@ -5,7 +5,7 @@ import { getSeededCharacter } from "./CharacterUtils";
 
 const LOCALSTORAGE_KEY = "user_games";
 const DEFAULT_GAME = "ptndle";
-const FIRST_GAME_DATE = getUTCDate(new Date("2025-03-01"));
+const FIRST_GAME_DATE = getUTCDate(new Date("2025-03-07"));
 
 /**
  * SAVING OVERVIEW
