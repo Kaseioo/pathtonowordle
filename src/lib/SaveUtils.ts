@@ -62,17 +62,53 @@ function loadGame(game_name: AvailableGames): Game {
 }
 
 /**
+ * Sets a debug value for the given game. This will be saved to the
+ * debug_info field of the game object. All values will be parsed as strings.
+ *
+ * @param game - The game object to set the debug value for.
+ * @param key - The key to set the value for.
+ * @param value - The value to set.
+ */
+function setDebugValue(game: Game, key: string, value: string): void {
+	const debug_info = game.debug_info ? JSON.parse(game.debug_info) : {};
+
+	debug_info[key] = value
+
+	game.debug_info = JSON.stringify(debug_info);
+	saveGame(game);
+}
+
+/**
+ * Gets a debug value for the given game. This will be read from the
+ * debug_info field of the game object. All values will be returned as strings.
+ *
+ * @param game - The game object to get the debug value for.
+ * @param key - The key to get the value for.
+ * @returns The value stored under the given key, or an empty string if it doesn't exist.
+ */
+function getDebugValue(game: Game, key: string): string {
+	const debug_info = game.debug_info ? JSON.parse(game.debug_info) : {};
+
+	return debug_info[key] ?? "";
+}
+
+/**
  * Updates the last played date of a game and saves it.
  * @param game - The game to update.
  */
 function updateLastPlayed(game: Game): void {
-	const last_played = Object.keys(game.history).at(-1);
-	if (!last_played) return;
+	const now = getUTCDate(new Date(), true);
 
-	game.dates.last_played = last_played;
+	game.dates.last_played = now;
 	saveGame(game);
 }
 
+/**
+ * Creates a new daily game for a given game_name.
+ * If the current day is not found in the game's history, a new daily game is created - this simply creates a new history entry. Beware.
+ * @param game_name - The name of the game to create a new daily game for.
+ * @returns A new daily game with the current date as its seed and guesses, or the existing game if it already has a daily game for today.
+ */
 function createNewDailyGame(game_name: AvailableGames): Game {
 	const game: Game = findGame(game_name);
 	const today = getUTCDate();
@@ -80,7 +116,7 @@ function createNewDailyGame(game_name: AvailableGames): Game {
 	if (game.history[today]) {
 		return structuredClone(game);
 	}
-	
+
 	game.history[today] = [];
 	game.data.seed = today;
 	game.data.guesses = game.history[today];
@@ -272,17 +308,29 @@ function getLastPlayedGame(): AvailableGames {
 		return game_name;
 	}
 
-	// ALL dates are strings
-	let last_played_date = "0000-00-00";
+	// ALL dates are strings. We are are going to cast them to Date objects to ensure no weird comparisons.
+	// This is needed! Do not remove.
+	let last_played_date = new Date("2025");
 	for (const key in games) {
 		const game = games[key as AvailableGames];
-		if (game.dates.last_played > last_played_date) {
-			last_played_date = game.dates.last_played;
+		const last_played = new Date(game.dates.last_played);
+		if (last_played > last_played_date) {
+			last_played_date = last_played;
 			game_name = game.name;
 		}
 	}
 
 	return game_name;
+}
+
+/**
+ * Switches the most recently played game date to the one specified.
+ * This works since we automatically calculate the most recent game by date elsewhere.
+ * @param game_name - The name of the game to switch to.
+ */
+function switchMostRecentGame(game_name: AvailableGames): void {
+	const game = loadGame(game_name);
+	updateLastPlayed(game);
 }
 
 /**
@@ -308,5 +356,8 @@ export {
 	getLastPlayedGame,
 	getAllGames,
 	updateScores,
-	createNewDailyGame
+	createNewDailyGame,
+	switchMostRecentGame,
+	setDebugValue,
+	getDebugValue
 };
