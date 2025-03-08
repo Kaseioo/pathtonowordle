@@ -1,13 +1,8 @@
 // src/lib/GameUtils.ts
-import { Character, Attribute, Guess } from "@/types";
-import {
-	getAllCharacters,
-	getSeededCharacter,
-	calculateThresholds,
-	getCharacterFromCode,
-} from "@/lib/CharacterUtils";
+import { Character, Attribute, Guess, AvailableGames, Game } from "@/types";
+import { getAllCharacters, getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
 import { evaluateGuess } from "@/lib/GuessUtils";
-import { loadGame, getDebugValue, setDebugValue, saveGame } from "./SaveUtils";
+import { loadGame, getDebugValue, setDebugValue, saveGame, createNewDailyGame } from "./SaveUtils";
 
 // Maximum guesses allowed
 export const MAX_GUESSES = 6;
@@ -67,6 +62,81 @@ export function updateEndlessMode(): void {
   saveGame(game);
 }
 
+export function initiateGameByMode(mode: AvailableGames): Game {
+	switch (mode) {
+		case "ptndle_endless":
+			return loadGame(mode);
+		case "ptndle":
+		default:
+			return createNewDailyGame(mode);
+	}
+}
+
+export function initiateGamePropsByMode(mode: AvailableGames) {
+  switch (mode) {
+    case "ptndle_endless":
+      return initiateEndlessMode(initiateGameByMode(mode));
+    case "ptndle":
+    default:
+      return initiateDefaultMode(initiateGameByMode(mode));
+  }
+}
+
+export function getGameProps(game: Game, seed: string) {
+  const loaded_target = getSeededCharacter(seed);
+
+	const is_game_won = isGameWon(game.data.guesses, loaded_target.code);
+	const is_game_over = isGameOver(game.data.guesses, loaded_target.code);
+	const legacy_guesses = getLegacyGuessesFromCodes(game.data.guesses, seed);
+	const filtered_characters = getCharacterListWithoutGuesses(game.data.guesses);
+
+  return {
+    seed: seed,
+    target: loaded_target,
+    is_game_won: is_game_won,
+    is_game_over: is_game_over,
+    guesses: legacy_guesses,
+    characters: filtered_characters,
+  };
+}
+
+export function initiateDefaultMode(game: Game) {
+  const current_seed = game.data.seed
+
+  return getGameProps(game, current_seed);
+  
+}
+export function initiateEndlessMode(game: Game) {
+	const mode = game.name;
+	if (mode !== "ptndle_endless") return initiateDefaultMode(game);
+
+	createEndlessResetValue();
+
+	const should_reset_endless = getDebugValue(game, "endless_reset");
+	const previous_daily_endless_count = parseInt(getDebugValue(game, "daily_endless_count") ?? 0);
+
+	const formatted_hour = `T00:00:00.${String(previous_daily_endless_count).padStart(3, "0")}Z`;
+	const today = getUTCDate();
+
+  const endless_seed = game.data.seed
+  const current_seed = should_reset_endless ? today + formatted_hour : endless_seed;
+
+  if (should_reset_endless) {
+		resetEndlessDebugValues(game);
+  }
+
+  return getGameProps(game, current_seed);
+
+}
+
+export function resetEndlessDebugValues(game: Game): void {
+  const today = getUTCDate();
+
+  setDebugValue(game, "endless_reset", "false");
+  if (new Date(game.dates.last_played) < new Date(today)) {
+    setDebugValue(game, "daily_endless_count", "0");
+  }
+}
 
 export function getLegacyGuessesFromCodes(codes: string[], seed: string = getUTCDate()): Attribute[][] {
   const characters = getCharactersFromCodes(codes);
