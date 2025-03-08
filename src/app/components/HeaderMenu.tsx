@@ -1,7 +1,7 @@
 // src/components/HeaderMenu.tsx
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import InstructionModal from './Modal/InstructionModal';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import InstructionModal from "./Modal/InstructionModal";
 
 interface HeaderMenuProps {
 	appVersion: string;
@@ -23,70 +23,23 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion, is_endless_mode_on,
 			<div>
 				<span className="text-gray-400">PtNdle {appVersion}</span>
 				<span className="text-gray-400 relative -top-0.5">
-					<InstructionModal
-						className="mx-2 w-6 h-6 inline"
-					/>
+					<InstructionModal className="mx-2 w-6 h-6 inline" />
 				</span>
 				<span>
-				<button
-					onClick={onToggleEndlessMode}
-					className="mx-2 relative -top-0.5"
-				>
-					<Image
-						src={endless_image}
-						alt="Endless Mode"
-						width={48} 
-						height={48}
-						className="inline"
-					/>
-					
-				</button>
+					<button onClick={onToggleEndlessMode} className="mx-2 relative -top-0.5">
+						<Image src={endless_image} alt="Endless Mode" width={48} height={48} className="inline" />
+					</button>
 				</span>
 			</div>
 			<div>
-				<a
-					href="https://github.com/Kaseioo/pathtonowordle"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="mx-2"
-				>
-					<Image
-						src="/images/github-mark-white.svg"
-						alt="GitHub"
-						width={32} 
-						height={32}
-						className="inline"
-					/>
-					
+				<a href="https://github.com/Kaseioo/pathtonowordle" target="_blank" rel="noopener noreferrer" className="mx-2">
+					<Image src="/images/github-mark-white.svg" alt="GitHub" width={32} height={32} className="inline" />
 				</a>
-				<a
-					href="https://ko-fi.com/pathtoluna"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="mx-2"
-				>
-					<Image
-						src="/images/kofi_logo.svg"
-						alt="Support Luna on Ko-fi!"
-						width={64} 
-						height={32}
-						className="inline"
-					/>
+				<a href="https://ko-fi.com/pathtoluna" target="_blank" rel="noopener noreferrer" className="mx-2">
+					<Image src="/images/kofi_logo.svg" alt="Support Luna on Ko-fi!" width={64} height={32} className="inline" />
 				</a>
-				<a
-					href="https://x.com/PathtoLuna"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="mx-2"
-				>
-					<Image
-						src="/images/x_logo.svg"
-						alt="Support Luna on Twitter!"
-						width={32} 
-						height={32}
-						className="inline"
-					/>
-					
+				<a href="https://x.com/PathtoLuna" target="_blank" rel="noopener noreferrer" className="mx-2">
+					<Image src="/images/x_logo.svg" alt="Support Luna on Twitter!" width={32} height={32} className="inline" />
 				</a>
 			</div>
 		</div>

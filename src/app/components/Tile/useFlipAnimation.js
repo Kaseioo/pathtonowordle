@@ -1,13 +1,13 @@
 // src/components/Tile/useFlipAnimation.js
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useFlipAnimation = (status, delay) => {
-	const [animationState, setAnimationState] = useState('idle'); 
+	const [animationState, setAnimationState] = useState("idle");
 
 	useEffect(() => {
-		if (status !== 'empty') {
+		if (status !== "empty") {
 			const timer = setTimeout(() => {
-				setAnimationState('flipping');
+				setAnimationState("flipping");
 			}, delay);
 
 			return () => clearTimeout(timer);
@@ -15,30 +15,30 @@ const useFlipAnimation = (status, delay) => {
 	}, [status, delay]);
 
 	useEffect(() => {
-		if (animationState === 'flipping') {
+		if (animationState === "flipping") {
 			const timer = setTimeout(() => {
-				setAnimationState('flipped');
+				setAnimationState("flipped");
 				setTimeout(() => {
-					setAnimationState('finished');
+					setAnimationState("finished");
 				}, 250);
-			}, 250); 
+			}, 250);
 			return () => clearTimeout(timer);
 		}
-	}, [animationState])
+	}, [animationState]);
 
-	let animationClass = '';
+	let animationClass = "";
 	switch (animationState) {
-		case 'flipping':
-			animationClass = 'flipping';
+		case "flipping":
+			animationClass = "flipping";
 			break;
-		case 'flipped':
-			animationClass = 'flipped';
+		case "flipped":
+			animationClass = "flipped";
 			break;
-		case 'finished':
-			animationClass = 'finished';
+		case "finished":
+			animationClass = "finished";
 			break;
 		default:
-			animationClass = ''; 
+			animationClass = "";
 	}
 
 	return animationClass;

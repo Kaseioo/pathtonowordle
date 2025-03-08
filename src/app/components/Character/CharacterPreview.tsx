@@ -1,6 +1,6 @@
 // components/CharacterPreview.jsx
-import Image from 'next/image';
-import { CharacterRank } from '@types';
+import Image from "next/image";
+import { CharacterRank } from "@types";
 
 interface CharacterPreviewProps {
 	characterRank: CharacterRank;
@@ -22,15 +22,17 @@ function CharacterPreview({
 	disable_highlight = false,
 }: CharacterPreviewProps) {
 	const bgClassName = disable_highlight ? "" : `bg-class-${characterRank}-gradient`;
-	const miniatureClassName = miniature ? 'rounded-full mr-2' : 'rounded-md';
+	const miniatureClassName = miniature ? "rounded-full mr-2" : "rounded-md";
 	// i think theres some optimization somewhere, or some lost toLowerCase fucking things because this simply wouldn't render correctly after packaging
-	displayValue = displayValue ? (displayValue.includes("sinner") ? displayValue.replace("sinner", "Sinner") : displayValue) : displayValue;
+	displayValue = displayValue
+		? displayValue.includes("sinner")
+			? displayValue.replace("sinner", "Sinner")
+			: displayValue
+		: displayValue;
 	return (
-		<div
-			className={`${bgClassName} ${miniatureClassName} relative overflow-hidden`}
-		>
+		<div className={`${bgClassName} ${miniatureClassName} relative overflow-hidden`}>
 			<Image
-				src={displayValue || '/images/placeholder.png'}
+				src={displayValue || "/images/placeholder.png"}
 				alt={`Image of ${character_name}`}
 				width={width}
 				height={height}

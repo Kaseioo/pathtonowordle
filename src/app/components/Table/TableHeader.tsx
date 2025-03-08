@@ -1,7 +1,7 @@
 // src/components/TableHeader.tsx
-import React, { useState } from 'react';
-import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'; // Import sort icons
-import './TableHeader.css';
+import React, { useState } from "react";
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa"; // Import sort icons
+import "./TableHeader.css";
 
 interface TableHeaderProps {
 	attributeKeys: string[];
@@ -9,11 +9,7 @@ interface TableHeaderProps {
 	onReverseChange: (newReverse: boolean) => void; // Callback function
 }
 
-const TableHeader: React.FC<TableHeaderProps> = ({
-	attributeKeys,
-	onReverseChange,
-	reversed
-}) => {
+const TableHeader: React.FC<TableHeaderProps> = ({ attributeKeys, onReverseChange, reversed }) => {
 	const [reverse, setReverse] = useState(reversed);
 
 	const handleImageSortClick = () => {
@@ -28,19 +24,18 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 				<span className="cursor-pointer" onClick={handleImageSortClick}>
 					Image
 				</span>
-				<span className="absolute right-1 top-0 sm:top-1/2 -translate-y-1/2 cursor-pointer" onClick={handleImageSortClick}>
-					{reverse === null ? (
-						<FaSort />
-					) : reverse ? (
-						<FaSortUp />
-					) : (
-						<FaSortDown />
-					)}
+				<span
+					className="absolute right-1 top-0 sm:top-1/2 -translate-y-1/2 cursor-pointer"
+					onClick={handleImageSortClick}
+				>
+					{reverse === null ? <FaSort /> : reverse ? <FaSortUp /> : <FaSortDown />}
 				</span>
 			</div>
 			<div className="header-tile wide">Name</div>
 			{attributeKeys.map((key) => (
-				<div key={key} className="header-tile">{key}</div>
+				<div key={key} className="header-tile">
+					{key}
+				</div>
 			))}
 		</div>
 	);

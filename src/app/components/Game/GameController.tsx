@@ -1,12 +1,12 @@
 // GameController.tsx
-import React from 'react';
-import GameStatus from '@components/Game/GameStatus'; // Import GameStatus
-import CharacterSelect from '@components/Character/CharacterSelect'; // Import CharacterSelect
-import { Attribute, Character } from '@types';
-import GameImageDisplay from '@components/Game/GameImageDisplay';
-import '@components/Game/GameController.css'
-import CountdownClock from '@components/CountdownClock';
-import Image from 'next/image';
+import React from "react";
+import GameStatus from "@components/Game/GameStatus"; // Import GameStatus
+import CharacterSelect from "@components/Character/CharacterSelect"; // Import CharacterSelect
+import { Attribute, Character } from "@types";
+import GameImageDisplay from "@components/Game/GameImageDisplay";
+import "@components/Game/GameController.css";
+import CountdownClock from "@components/CountdownClock";
+import Image from "next/image";
 
 interface GameControllerProps {
 	imageSrc: string;
@@ -36,7 +36,9 @@ const GameController: React.FC<GameControllerProps> = ({
 	guessDisabled,
 }) => {
 	const current_date = new Date(new Date().toUTCString());
-	const next_date = new Date(Date.UTC(current_date.getUTCFullYear(), current_date.getUTCMonth(), current_date.getUTCDate() + 1));
+	const next_date = new Date(
+		Date.UTC(current_date.getUTCFullYear(), current_date.getUTCMonth(), current_date.getUTCDate() + 1)
+	);
 	const gameFinished = gameOver || gameWon;
 	return (
 		<div className="controller-body">
@@ -50,17 +52,10 @@ const GameController: React.FC<GameControllerProps> = ({
 						guesses={guesses}
 						MAX_GUESSES={MAX_GUESSES}
 					/>
-					{gameFinished && (
-						<CountdownClock nextDate={next_date} />
-					)}
-
+					{gameFinished && <CountdownClock nextDate={next_date} />}
 
 					{!gameFinished && (
-						<CharacterSelect
-							characters={allCharacters}
-							onSelect={handleSelectCharacter}
-							disabled={guessDisabled}
-						/>
+						<CharacterSelect characters={allCharacters} onSelect={handleSelectCharacter} disabled={guessDisabled} />
 					)}
 					{isEndlessOn && (
 						<div className="flex flex-col mt-4 items-center justify-center bg-s1n-gradient w-full border border-foreground-highlight">
@@ -81,19 +76,23 @@ const GameController: React.FC<GameControllerProps> = ({
 									</button>
 								</>
 							) : (
-								<div className="flex w-full h-8 mx-4 items-center justify-center">
-									Endless Mode is enabled.
-								</div>
+								<div className="flex w-full h-8 mx-4 items-center justify-center">Endless Mode is enabled.</div>
 							)}
 						</div>
 					)}
-
 				</div>
 			</div>
 			<div className="mb-0 mt-2 mr-2 flex items-end justify-center bg-opacity-50 rounded-md">
 				<span className="text-xs text-gray-200">
 					Found something wrong? &nbsp;
-					<a href="https://github.com/Kaseioo/pathtonowordle/issues" target="_blank" rel="noopener noreferrer" className="underline">Report on GitHub.</a>
+					<a
+						href="https://github.com/Kaseioo/pathtonowordle/issues"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="underline"
+					>
+						Report on GitHub.
+					</a>
 				</span>
 			</div>
 		</div>

@@ -54,9 +54,7 @@ function loadGame(game_name: AvailableGames): Game {
 	} catch (error) {
 		// TODO: create proper error instances
 		console.error(error);
-		console.warn(
-			`An error has occured. Forcefully creating a new empty ${game_name} save instance to avoid further errors.`
-		);
+		console.warn(`An error has occured. Forcefully creating a new empty ${game_name} save instance to avoid further errors.`);
 		return createEmptySave(game_name);
 	}
 }
@@ -72,7 +70,7 @@ function loadGame(game_name: AvailableGames): Game {
 function setDebugValue(game: Game, key: string, value: string): void {
 	const debug_info = game.debug_info ? JSON.parse(game.debug_info) : {};
 
-	debug_info[key] = value
+	debug_info[key] = value;
 
 	game.debug_info = JSON.stringify(debug_info);
 	saveGame(game);
@@ -163,17 +161,11 @@ function calculateStreak(game: Game): void {
 	const last_date = Object.keys(game.history).at(-1);
 	let current_streak = 0;
 
-	if (
-		last_date &&
-		isGameWon(game.history[last_date], getSeededCharacter(last_date).code)
-	) {
+	if (last_date && isGameWon(game.history[last_date], getSeededCharacter(last_date).code)) {
 		// for streak, we can start on our most recent date and work backwards since we only want to count wins
 		for (let i = Object.keys(game.history).length - 1; i >= 0; i--) {
 			const date = Object.keys(game.history)[i];
-			const has_won = isGameWon(
-				game.history[date],
-				getSeededCharacter(date).code
-			);
+			const has_won = isGameWon(game.history[date], getSeededCharacter(date).code);
 			if (has_won) {
 				current_streak += 1;
 			} else {
@@ -340,9 +332,7 @@ function switchMostRecentGame(game_name: AvailableGames): void {
 export function getDailyGameNumber(): string {
 	// hour, minute, second, millisecond
 	const division = 24 * 60 * 60 * 1000;
-	const days_elapsed = Math.floor(
-		(Date.now() - new Date(FIRST_GAME_DATE).getTime()) / division
-	);
+	const days_elapsed = Math.floor((Date.now() - new Date(FIRST_GAME_DATE).getTime()) / division);
 	const daily_game_number = days_elapsed + 1;
 
 	return daily_game_number.toString();
@@ -359,5 +349,5 @@ export {
 	createNewDailyGame,
 	switchMostRecentGame,
 	setDebugValue,
-	getDebugValue
+	getDebugValue,
 };

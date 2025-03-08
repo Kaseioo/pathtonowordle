@@ -1,8 +1,8 @@
 // components/Modal.tsx
-import React, { useEffect, ReactNode } from 'react';
-import { IoClose } from 'react-icons/io5';
+import React, { useEffect, ReactNode } from "react";
+import { IoClose } from "react-icons/io5";
 
-import '@components/Modal/Modal.css';
+import "@components/Modal/Modal.css";
 
 interface ModalProps {
 	isOpen: boolean;
@@ -14,13 +14,13 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
 	useEffect(() => {
 		if (isOpen) {
-			document.body.style.overflow = 'hidden';
+			document.body.style.overflow = "hidden";
 		} else {
-			document.body.style.overflow = 'unset';
+			document.body.style.overflow = "unset";
 		}
 
 		return () => {
-			document.body.style.overflow = 'unset';
+			document.body.style.overflow = "unset";
 		};
 	}, [isOpen]);
 
@@ -34,24 +34,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
 		return null;
 	}
 
-
 	return (
 		<div className="modalOverlay" onClick={handleOverlayClick}>
 			<div className="modalContent">
 				<div className="modalHeader">
 					<h2 className="modalTitle">{title}</h2>
-					<button
-						type="button"
-						onClick={onClose}
-						className="closeButton"
-						aria-label="Close"
-					>
+					<button type="button" onClick={onClose} className="closeButton" aria-label="Close">
 						<IoClose className=" w-8 h-8" />
 					</button>
 				</div>
-				<div className="modalBody">
-					{children}
-				</div>
+				<div className="modalBody">{children}</div>
 			</div>
 		</div>
 	);
