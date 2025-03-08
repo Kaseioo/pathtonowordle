@@ -13,11 +13,13 @@ const GuessTable: React.FC<GuessTableProps> = ({ guesses, target_guess, threshol
 	const displayedGuesses = reverse ? [...guesses].reverse() : guesses;
 	return (
 		<>
-			<div className="inline-flex flex-col mt-1">
-				{displayedGuesses.map((guess, index) => (
-					<GuessRow key={index} guess={guess} thresholds={thresholds} target_guess={target_guess} rowIndex={index} />
-				))}
-			</div>
+			<table>
+				<tbody className="inline-flex flex-col mt-1">
+					{displayedGuesses.map((guess, index) => (
+						<GuessRow key={index} guess={guess} thresholds={thresholds} target_guess={target_guess} rowIndex={index} />
+					))}
+				</tbody>
+			</table>
 		</>
 	);
 };

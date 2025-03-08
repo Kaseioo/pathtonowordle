@@ -46,7 +46,7 @@ const Tile: React.FC<TileProps> = ({
 
 	return (
 		<>
-			<div className={`tile ${animationClass} ${statusClass}`}>
+			<td className={`tile ${animationClass} ${statusClass}`}>
 				<div className="tile-face tile-face-front">
 					<div className={tile_formatting}>
 						<Image
@@ -78,7 +78,7 @@ const Tile: React.FC<TileProps> = ({
 						)}
 					</div>
 				</div>
-			</div>
+			</td>
 		</>
 	);
 };
