@@ -1,7 +1,7 @@
 // EmojiGuesses.tsx
 import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { Attribute } from '@/types';
-import { getDailyGameNumber } from '@/lib/SaveUtils';
+import { Attribute } from '@types';
+import { getDailyGameNumber } from '@lib/SaveUtils';
 
 interface EmojiGuessesProps {
   guesses: Array<Array<Attribute>>;  // Array of arrays, each inner array is a guess

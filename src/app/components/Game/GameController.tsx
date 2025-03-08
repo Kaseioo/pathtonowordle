@@ -1,11 +1,11 @@
 // GameController.tsx
 import React from 'react';
-import GameStatus from '@/components/Game/GameStatus'; // Import GameStatus
-import CharacterSelect from '@/components/Character/CharacterSelect'; // Import CharacterSelect
-import { Attribute, Character } from '@/types';
-import GameImageDisplay from '@/components/Game/GameImageDisplay';
-import '@/components/Game/GameController.css'
-import CountdownClock from '@/components/CountdownClock';
+import GameStatus from '@components/Game/GameStatus'; // Import GameStatus
+import CharacterSelect from '@components/Character/CharacterSelect'; // Import CharacterSelect
+import { Attribute, Character } from '@types';
+import GameImageDisplay from '@components/Game/GameImageDisplay';
+import '@components/Game/GameController.css'
+import CountdownClock from '@components/CountdownClock';
 import Image from 'next/image';
 
 interface GameControllerProps {

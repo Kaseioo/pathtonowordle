@@ -1,7 +1,7 @@
 // src/components/GameImageDisplay.tsx (or .jsx)
 import React from 'react';
 import Image from 'next/image';
-import { Character } from '@/types';
+import { Character } from '@types';
 
 interface GameImageDisplayProps {
 	imageSrc: string;

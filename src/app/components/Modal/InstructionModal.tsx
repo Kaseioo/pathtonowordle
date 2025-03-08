@@ -1,6 +1,6 @@
 // components/InstructionModal.tsx
 import React, { useState } from 'react';
-import Modal from '@/components/Modal/Modal';
+import Modal from '@components/Modal/Modal';
 import { IoHelpCircleOutline } from 'react-icons/io5';
 
 interface InstructionModalProps {

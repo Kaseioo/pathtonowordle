@@ -1,14 +1,14 @@
 'use client';
-import '@/styles/Container.css'
+import '@styles/Container.css'
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Character, Attribute, AvailableGames, APP_VERSION, Game } from "@/types";
-import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
-import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted, createEndlessResetValue, updateEndlessMode, initiateGameByMode, initiateEndlessMode, initiateDefaultMode, initiateGamePropsByMode } from "@/lib/GameUtils";
-import { saveGame, loadGame, getLastPlayedGame, updateScores, createNewDailyGame, switchMostRecentGame, setDebugValue, getDebugValue } from "@/lib/SaveUtils";
-import GameController from "@/components/Game/GameController";
-import GuessTable from "@/components/Table/GuessTable";
-import HeaderMenu from "@/app/components/HeaderMenu";
-import TableHeader from "@/components/Table/TableHeader";
+import { Character, Attribute, AvailableGames, APP_VERSION, Game } from "@types";
+import { getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@lib/CharacterUtils";
+import { getUTCDate, isGameWon, isGameOver, getLegacyGuessesFromCodes, getCharacterListWithoutGuesses, hasGameStarted, createEndlessResetValue, updateEndlessMode, initiateGameByMode, initiateEndlessMode, initiateDefaultMode, initiateGamePropsByMode } from "@lib/GameUtils";
+import { saveGame, loadGame, getLastPlayedGame, updateScores, createNewDailyGame, switchMostRecentGame, setDebugValue, getDebugValue } from "@lib/SaveUtils";
+import GameController from "@components/Game/GameController";
+import GuessTable from "@components/Table/GuessTable";
+import HeaderMenu from "@app/components/HeaderMenu";
+import TableHeader from "@components/Table/TableHeader";
 
 const MAX_GUESSES = 6;
 const ATTRIBUTE_KEYS = ["code", "alignment", "tendency", "height", "birthplace"];

@@ -1,8 +1,8 @@
 // GuessRow.tsx
 import React from 'react';
-import Tile from '@/app/components/Tile/Tile';
-import { Attribute, Character, Thresholds } from '@/types';
-import { EvaluateNumericalGuess } from '@/lib/GuessUtils';
+import Tile from '@app/components/Tile/Tile';
+import { Attribute, Character, Thresholds } from '@types';
+import { EvaluateNumericalGuess } from '@lib/GuessUtils';
 
 interface GuessRowProps {
 	guess: Array<Attribute>;

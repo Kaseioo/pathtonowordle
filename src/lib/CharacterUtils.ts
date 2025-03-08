@@ -3,9 +3,9 @@
 import {
   Character,
   Thresholds,
-} from "@/types";
-import characterData from "@/character_data/characters.json";
-import { getUTCDate } from "@/lib/GameUtils";
+} from "@types";
+import characterData from "@character_data/characters.json";
+import { getUTCDate } from "@lib/GameUtils";
 
 const DEFAULT_CHARACTERS: Character[] = characterData as Character[];
 

@@ -1,6 +1,6 @@
 // lib/GuessUtils.ts
 
-import { Guess, Attribute, AttributeState } from "@/types";
+import { Guess, Attribute, AttributeState } from "@types";
 
 export type GuessDistanceEvaluationResult = 
   | { comparison: "≅"; description: "close" }

@@ -1,6 +1,6 @@
 // components/CharacterPreview.jsx
 import Image from 'next/image';
-import { CharacterRank } from '@/types';
+import { CharacterRank } from '@types';
 
 interface CharacterPreviewProps {
 	characterRank: CharacterRank;

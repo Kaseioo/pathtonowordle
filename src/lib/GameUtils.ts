@@ -1,7 +1,7 @@
 // src/lib/GameUtils.ts
-import { Character, Attribute, Guess, AvailableGames, Game } from "@/types";
-import { getAllCharacters, getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@/lib/CharacterUtils";
-import { evaluateGuess } from "@/lib/GuessUtils";
+import { Character, Attribute, Guess, AvailableGames, Game } from "@types";
+import { getAllCharacters, getSeededCharacter, calculateThresholds, getCharacterFromCode } from "@lib/CharacterUtils";
+import { evaluateGuess } from "@lib/GuessUtils";
 import { loadGame, getDebugValue, setDebugValue, saveGame, createNewDailyGame } from "./SaveUtils";
 
 // Maximum guesses allowed

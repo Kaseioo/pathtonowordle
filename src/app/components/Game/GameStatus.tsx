@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import EmojiGuesses from './EmojiGuesses';
-import { Attribute } from '@/types';
-import { hasGameStarted } from '@/lib/GameUtils';
-import { loadGame, getLastPlayedGame } from '@/lib/SaveUtils';
+import { Attribute } from '@types';
+import { hasGameStarted } from '@lib/GameUtils';
+import { loadGame, getLastPlayedGame } from '@lib/SaveUtils';
 
 interface GameStatusProps {
 	gameOver: boolean;

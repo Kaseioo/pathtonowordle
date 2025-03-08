@@ -1,9 +1,9 @@
 // src/app/components/CharacterSelect.tsx
 import React, { useEffect, useRef } from 'react';
 import Select from 'react-select';
-import { Character, CharacterRank } from '@/types';
+import { Character, CharacterRank } from '@types';
 import { useState } from 'react';
-import CharacterPreview from '@/components/Character/CharacterPreview';
+import CharacterPreview from '@components/Character/CharacterPreview';
 
 interface Props {
   characters: Character[];

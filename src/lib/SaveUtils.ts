@@ -1,6 +1,6 @@
 // src/lib/SaveUtils.ts
-import { AvailableGames, Game, UserGames } from "@/types";
-import { getUTCDate, isGameWon } from "@/lib/GameUtils";
+import { AvailableGames, Game, UserGames } from "@types";
+import { getUTCDate, isGameWon } from "@lib/GameUtils";
 import { getSeededCharacter } from "./CharacterUtils";
 
 const LOCALSTORAGE_KEY = "user_games";

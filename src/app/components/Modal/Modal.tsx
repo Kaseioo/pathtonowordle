@@ -2,7 +2,7 @@
 import React, { useEffect, ReactNode } from 'react';
 import { IoClose } from 'react-icons/io5';
 
-import '@/components/Modal/Modal.css';
+import '@components/Modal/Modal.css';
 
 interface ModalProps {
 	isOpen: boolean;

@@ -1,11 +1,11 @@
 // src/app/components/Tile.tsx
 import React from 'react';
-import { Attribute, CharacterRank } from '@/types';
+import { Attribute, CharacterRank } from '@types';
 import Image from 'next/image';
 import './Tile.css';
-import '@/components/Character/CharacterPreview'
-import CharacterPreview from '@/components/Character/CharacterPreview';
-import useFlipAnimation from '@/components/Tile/useFlipAnimation';
+import '@components/Character/CharacterPreview'
+import CharacterPreview from '@components/Character/CharacterPreview';
+import useFlipAnimation from '@components/Tile/useFlipAnimation';
 
 interface TileProps {
   attribute: Attribute;

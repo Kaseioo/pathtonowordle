@@ -1,6 +1,6 @@
 // GuessTable.tsx
 import React from 'react';
-import { Attribute, Character, Thresholds } from '@/types';
+import { Attribute, Character, Thresholds } from '@types';
 import GuessRow from './GuessRow';
 
 interface GuessTableProps {
