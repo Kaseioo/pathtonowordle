@@ -7,7 +7,7 @@ import { getUTCDate, hasGameStarted, updateEndlessMode, initiateGameByMode, init
 import { saveGame, loadGame, getLastPlayedGame, updateScores, switchMostRecentGame } from "@lib/SaveUtils";
 import GameController from "@components/Game/GameController";
 import GuessTable from "@components/Table/GuessTable";
-import HeaderMenu from "@app/components/HeaderMenu";
+import HeaderMenu from "@components/HeaderMenu";
 import TableHeader from "@components/Table/TableHeader";
 
 const MAX_GUESSES = 6;
