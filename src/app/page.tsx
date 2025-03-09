@@ -113,7 +113,8 @@ export default function Home() {
     (character: Character) => {
       if (saveOver || guessDisabled) return;
 
-      const loaded_game = loadGame(current_game.current);
+	  const game_to_load = getLastPlayedGame();
+	  const loaded_game = game_to_load === "ptndle" ? createNewDailyGame(game_to_load) : loadGame(game_to_load);
 
       loaded_game.data.guesses.push(character.code)
 

@@ -112,13 +112,14 @@ function updateLastPlayed(game: Game): void {
 function createNewDailyGame(game_name: AvailableGames): Game {
 	const game: Game = findGame(game_name);
 	const today = getUTCDate();
+	
+	game.data.seed = today;
 
 	if (game.history[today]) {
 		return structuredClone(game);
 	}
 
 	game.history[today] = [];
-	game.data.seed = today;
 	game.data.guesses = game.history[today];
 
 	return structuredClone(game);
