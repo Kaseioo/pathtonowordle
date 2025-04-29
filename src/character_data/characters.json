@@ -600,7 +600,7 @@
   {
     "name": "Jelena",
     "code": "016",
-    "alignment": "Love",
+    "alignment": "Pestilence",
     "tendency": "Catalyst",
     "height": "171cm",
     "birthplace": "Other",
@@ -1313,6 +1313,19 @@
     "rank": "A"
   },
   {
+    "name": "Wuhuanzi",
+    "code": "370",
+    "alignment": "Sloth",
+    "tendency": "Arcane",
+    "height": "149cm",
+    "birthplace": "Other",
+    "birthday": "July 15",
+    "release date": "30",
+    "image": "/images/Sinner/wuhuanzi-icon.png",
+    "image_full": "/images/Sinner/wuhuanzi-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Yanyan",
     "code": "307",
     "alignment": "Heresy",
@@ -1336,6 +1349,32 @@
     "release date": "20",
     "image": "/images/Sinner/yao-icon.png",
     "image_full": "/images/Sinner/yao-mugshot.png",
+    "rank": "S"
+  },
+  {
+    "name": "Yingying",
+    "code": "030",
+    "alignment": "Love",
+    "tendency": "Arcane",
+    "height": "163cm",
+    "birthplace": "Other",
+    "birthday": "March 19",
+    "release date": "30",
+    "image": "/images/Sinner/yingying-icon.png",
+    "image_full": "/images/Sinner/yingying-mugshot.png",
+    "rank": "S"
+  },
+  {
+    "name": "Yugu",
+    "code": "042",
+    "alignment": "Fraud",
+    "tendency": "Endura",
+    "height": "171cm",
+    "birthplace": "Other",
+    "birthday": "April 11",
+    "release date": "30",
+    "image": "/images/Sinner/yugu-icon.png",
+    "image_full": "/images/Sinner/yugu-mugshot.png",
     "rank": "S"
   },
   {
