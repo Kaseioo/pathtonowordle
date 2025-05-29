@@ -494,6 +494,19 @@
     "rank": "A"
   },
   {
+    "name": "Graves",
+    "code": "214",
+    "alignment": "Death",
+    "tendency": "Umbra",
+    "height": "166cm",
+    "birthplace": "Syndicate",
+    "birthday": "November 2",
+    "release date": "31",
+    "image": "/images/Sinner/graves-icon.png",
+    "image_full": "/images/Sinner/graves-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Hamel",
     "code": "008",
     "alignment": "Love",
@@ -778,6 +791,19 @@
     "image": "/images/Sinner/lisa-icon.png",
     "image_full": "/images/Sinner/lisa-mugshot.png",
     "rank": "B"
+  },
+  {
+    "name": "Luminita",
+    "code": "413",
+    "alignment": "Sloth",
+    "tendency": "Endura",
+    "height": "160cm",
+    "birthplace": "Eastside",
+    "birthday": "June 16",
+    "release date": "31",
+    "image": "/images/Sinner/Luminita-icon.png",
+    "image_full": "/images/Sinner/Luminita-mugshot.png",
+    "rank": "A"
   },
   {
     "name": "Luvia Ray",
