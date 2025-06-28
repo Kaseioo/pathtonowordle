@@ -571,6 +571,19 @@
     "image_full": "/images/Sinner/horo-mugshot.png",
     "rank": "A"
   },
+   {
+    "name": "Hypatia",
+    "code": "197",
+    "alignment": "Famine",
+    "tendency": "Reticle",
+    "height": "163cm",
+    "birthplace": "Other",
+    "birthday": "May 11",
+    "release date": "32",
+    "image": "/images/Sinner/hypatia-icon.png",
+    "image_full": "/images/Sinner/hypatia-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Ignis",
     "code": "051",
@@ -829,6 +842,19 @@
     "release date": "6",
     "image": "/images/Sinner/lynn-icon.png",
     "image_full": "/images/Sinner/lynn-mugshot.png",
+    "rank": "A"
+  },
+   {
+    "name": "Lysandra",
+    "code": "369",
+    "alignment": "Violence",
+    "tendency": "Fury",
+    "height": "167cm",
+    "birthplace": "Other",
+    "birthday": "September 13",
+    "release date": "32",
+    "image": "/images/Sinner/lysandra-icon.png",
+    "image_full": "/images/Sinner/lysandra-mugshot.png",
     "rank": "A"
   },
   {
