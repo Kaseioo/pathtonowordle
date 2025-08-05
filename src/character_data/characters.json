@@ -1273,6 +1273,19 @@
     "image_full": "/images/Sinner/tetra-mugshot.png",
     "rank": "A"
   },
+    {
+    "name": "Thalia",
+    "code": "411",
+    "alignment": "Greed",
+    "tendency": "Reticle",
+    "height": "165cm",
+    "birthplace": "Eastside",
+    "birthday": "May 22",
+    "release date": "33",
+    "image": "/images/Sinner/thalia-icon.png",
+    "image_full": "/images/Sinner/thalia-mugshot.png",
+    "rank": "A"
+  },
   {
     "name": "Thistle",
     "code": "629",
