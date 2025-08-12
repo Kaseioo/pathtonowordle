@@ -623,6 +623,19 @@
     "image_full": "/images/Sinner/jane-mugshot.png",
     "rank": "A"
   },
+    {
+    "name": "Jasmine",
+    "code": "105",
+    "alignment": "War",
+    "tendency": "Fury",
+    "height": "168cm",
+    "birthplace": "Other",
+    "birthday": "November 8",
+    "release date": "33",
+    "image": "/images/Sinner/jasmine-icon.png",
+    "image_full": "/images/Sinner/jasmine-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Jelena",
     "code": "016",
@@ -1051,6 +1064,19 @@
     "image": "/images/Sinner/pacassi-icon.png",
     "image_full": "/images/Sinner/pacassi-mugshot.png",
     "rank": "A"
+  },
+    {
+    "name": "Parfait",
+    "code": "094",
+    "alignment": "Death",
+    "tendency": "Catalyst",
+    "height": "167cm",
+    "birthplace": "Syndicate",
+    "birthday": "January 28",
+    "release date": "33",
+    "image": "/images/Sinner/parfait-icon.png",
+    "image_full": "/images/Sinner/parfait-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Peggy",
