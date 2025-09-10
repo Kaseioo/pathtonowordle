@@ -1118,6 +1118,19 @@
     "rank": "A"
   },
   {
+    "name": "Poffy",
+    "code": "580",
+    "alignment": "Sloth",
+    "tendency": "Umbra",
+    "height": "164cm",
+    "birthplace": "Eastside",
+    "birthday": "April 29",
+    "release date": "34",
+    "image": "/images/Sinner/poffy-icon.png",
+    "image_full": "/images/Sinner/poffy-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Pricilla",
     "code": "067",
     "alignment": "Greed",
@@ -1234,6 +1247,18 @@
     "image_full": "/images/Sinner/shawn-mugshot.png",
     "rank": "A"
   },
+  {
+    "name": "Shin",
+    "code": "021",
+    "alignment": "Immortal",
+    "tendency": "Catalyst",
+    "height": "170cm",
+    "birthplace": "Other",
+    "birthday": "November 15",
+    "release date": "34",
+    "image": "/images/Sinner/shin-icon.png",
+    "image_full": "/images/Sinner/shin-mugshot.png",
+    "rank": "S"
   {
     "name": "Shrooma",
     "code": "231",
