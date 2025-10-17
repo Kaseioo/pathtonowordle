@@ -117,6 +117,19 @@
     "rank": "A"
   },
   {
+    "name": "Cassian",
+    "code": "310",
+    "alignment": "Sloth",
+    "tendency": "Catalyst",
+    "height": "179cm",
+    "birthplace": "Eastside",
+    "birthday": "November 19",
+    "release date": "35",
+    "image": "/images/Sinner/cassian-icon.png",
+    "image_full": "/images/Sinner/cassian-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Chameleon",
     "code": "052",
     "alignment": "Heresy",
@@ -934,6 +947,19 @@
     "image": "/images/Sinner/mess-icon.png",
     "image_full": "/images/Sinner/mess-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Milly",
+    "code": "459",
+    "alignment": "Death",
+    "tendency": "Arcane",
+    "height": "168cm",
+    "birthplace": "Syndicate",
+    "birthday": "July 9",
+    "release date": "35",
+    "image": "/images/Sinner/milly-icon.png",
+    "image_full": "/images/Sinner/milly-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Mira",
