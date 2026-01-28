@@ -4,7 +4,7 @@ import {
 	getAllCharacters,
 	getSeededCharacter,
 	calculateThresholds,
-	getCharacterFromCode,
+	getCharacterFromName,
 } from "@/lib/CharacterUtils";
 import { evaluateGuess } from "@/lib/GuessUtils";
 import { loadGame, getDebugValue, setDebugValue, saveGame } from "./SaveUtils";
@@ -30,14 +30,14 @@ export function isGameOver(guesses: string[], target: string): boolean {
 	return guesses.length >= MAX_GUESSES;
 }
 
-export function getCharactersFromCodes(guesses: string[]): Character[] {
-	return guesses.map(guess => getCharacterFromCode(guess));
+export function getCharactersFromNames(guesses: string[]): Character[] {
+	return guesses.map(guess => getCharacterFromName(guess));
 }
 
 export function getCharacterListWithoutGuesses(guesses: string[]): Character[] {
 	const characters = getAllCharacters();
   
-	return characters.filter(character => !guesses.includes(character.code));
+	return characters.filter(character => !guesses.includes(character.name));
 }
 
 export function hasGameStarted(guesses: string[] | Attribute[][]): boolean {
@@ -68,8 +68,8 @@ export function updateEndlessMode(): void {
 }
 
 
-export function getLegacyGuessesFromCodes(codes: string[], seed: string = getUTCDate()): Attribute[][] {
-  const characters = getCharactersFromCodes(codes);
+export function getLegacyGuessesFromNames(names: string[], seed: string = getUTCDate()): Attribute[][] {
+  const characters = getCharactersFromNames(names);
   const target = getSeededCharacter(seed);
   const thresholds = calculateThresholds(target);
 

@@ -64,6 +64,32 @@
     "image_full": "/images/Sinner/ariel-mugshot.png",
     "rank": "A"
   },
+   {
+    "name": "Ark",
+    "code": "557",
+    "alignment": "Love",
+    "tendency": "Fury",
+    "height": "154cm",
+    "birthplace": "Other",
+    "birthday": "October 27",
+    "release date": "38",
+    "image": "/images/Sinner/ark-icon.png",
+    "image_full": "/images/Sinner/ark-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Augustus",
+    "code": "005",
+    "alignment": "War",
+    "tendency": "Reticle",
+    "height": "175cm",
+    "birthplace": "Other",
+    "birthday": "July 14",
+    "release date": "37",
+    "image": "/images/Sinner/augustus-icon.png",
+    "image_full": "/images/Sinner/augustus-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Bai Yi",
     "code": "027",
@@ -115,6 +141,32 @@
     "image": "/images/Sinner/cassia-icon.png",
     "image_full": "/images/Sinner/cassia-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Cassian",
+    "code": "310",
+    "alignment": "Sloth",
+    "tendency": "Catalyst",
+    "height": "179cm",
+    "birthplace": "Eastside",
+    "birthday": "November 19",
+    "release date": "35",
+    "image": "/images/Sinner/cassian-icon.png",
+    "image_full": "/images/Sinner/cassian-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Ceto",
+    "code": "118",
+    "alignment": "War",
+    "tendency": "Umbra",
+    "height": "173cm",
+    "birthplace": "Other",
+    "birthday": "December 27",
+    "release date": "38",
+    "image": "/images/Sinner/ceto-icon.png",
+    "image_full": "/images/Sinner/ceto-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Chameleon",
@@ -494,6 +546,19 @@
     "rank": "A"
   },
   {
+    "name": "Graves",
+    "code": "214",
+    "alignment": "Death",
+    "tendency": "Umbra",
+    "height": "166cm",
+    "birthplace": "Syndicate",
+    "birthday": "November 2",
+    "release date": "31",
+    "image": "/images/Sinner/graves-icon.png",
+    "image_full": "/images/Sinner/graves-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Hamel",
     "code": "008",
     "alignment": "Love",
@@ -546,6 +611,19 @@
     "rank": "S"
   },
   {
+    "name": "Hilda",
+    "code": "035",
+    "alignment": "Sequester",
+    "tendency": "Arcane",
+    "height": "168cm",
+    "birthplace": "Other",
+    "birthday": "December 10",
+    "release date": "39",
+    "image": "/images/Sinner/hilda-icon.png",
+    "image_full": "/images/Sinner/hilda-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Horo",
     "code": "186",
     "alignment": "Anger",
@@ -557,6 +635,19 @@
     "image": "/images/Sinner/horo-icon.png",
     "image_full": "/images/Sinner/horo-mugshot.png",
     "rank": "A"
+  },
+   {
+    "name": "Hypatia",
+    "code": "197",
+    "alignment": "Famine",
+    "tendency": "Reticle",
+    "height": "163cm",
+    "birthplace": "Other",
+    "birthday": "May 11",
+    "release date": "32",
+    "image": "/images/Sinner/hypatia-icon.png",
+    "image_full": "/images/Sinner/hypatia-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Ignis",
@@ -597,10 +688,23 @@
     "image_full": "/images/Sinner/jane-mugshot.png",
     "rank": "A"
   },
+    {
+    "name": "Jasmine",
+    "code": "105",
+    "alignment": "War",
+    "tendency": "Fury",
+    "height": "168cm",
+    "birthplace": "Other",
+    "birthday": "November 8",
+    "release date": "33",
+    "image": "/images/Sinner/jasmine-icon.png",
+    "image_full": "/images/Sinner/jasmine-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Jelena",
     "code": "016",
-    "alignment": "Pestilence",
+    "alignment": "Famine",
     "tendency": "Catalyst",
     "height": "171cm",
     "birthplace": "Other",
@@ -780,6 +884,19 @@
     "rank": "B"
   },
   {
+    "name": "Luminita",
+    "code": "413",
+    "alignment": "Sloth",
+    "tendency": "Endura",
+    "height": "160cm",
+    "birthplace": "Eastside",
+    "birthday": "June 16",
+    "release date": "31",
+    "image": "/images/Sinner/luminita-icon.png",
+    "image_full": "/images/Sinner/luminita-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Luvia Ray",
     "code": "341",
     "alignment": "Limbo",
@@ -803,6 +920,19 @@
     "release date": "6",
     "image": "/images/Sinner/lynn-icon.png",
     "image_full": "/images/Sinner/lynn-mugshot.png",
+    "rank": "A"
+  },
+   {
+    "name": "Lysandra",
+    "code": "369",
+    "alignment": "Violence",
+    "tendency": "Fury",
+    "height": "167cm",
+    "birthplace": "Other",
+    "birthday": "September 13",
+    "release date": "32",
+    "image": "/images/Sinner/lysandra-icon.png",
+    "image_full": "/images/Sinner/lysandra-mugshot.png",
     "rank": "A"
   },
   {
@@ -871,6 +1001,19 @@
     "rank": "A"
   },
   {
+    "name": "Milly",
+    "code": "459",
+    "alignment": "Death",
+    "tendency": "Arcane",
+    "height": "168cm",
+    "birthplace": "Syndicate",
+    "birthday": "July 9",
+    "release date": "35",
+    "image": "/images/Sinner/milly-icon.png",
+    "image_full": "/images/Sinner/milly-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Mira",
     "code": "224",
     "alignment": "Famine",
@@ -908,6 +1051,19 @@
     "image": "/images/Sinner/mrfox-icon.png",
     "image_full": "/images/Sinner/mrfox-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Necresta Hella",
+    "code": "098",
+    "alignment": "Famine",
+    "tendency": "Umbra",
+    "height": "152cm",
+    "birthplace": "Syndicate",
+    "birthday": "December 2",
+    "release date": "37",
+    "image": "/images/Sinner/necrestahella-icon.png",
+    "image_full": "/images/Sinner/necrestahella-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "NOX",
@@ -1000,6 +1156,19 @@
     "image_full": "/images/Sinner/pacassi-mugshot.png",
     "rank": "A"
   },
+    {
+    "name": "Parfait",
+    "code": "094",
+    "alignment": "Death",
+    "tendency": "Catalyst",
+    "height": "167cm",
+    "birthplace": "Syndicate",
+    "birthday": "January 28",
+    "release date": "33",
+    "image": "/images/Sinner/parfait-icon.png",
+    "image_full": "/images/Sinner/parfait-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Peggy",
     "code": "500",
@@ -1037,6 +1206,19 @@
     "release date": "29",
     "image": "/images/Sinner/pine-icon.png",
     "image_full": "/images/Sinner/pine-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Poffy",
+    "code": "580",
+    "alignment": "Sloth",
+    "tendency": "Umbra",
+    "height": "164cm",
+    "birthplace": "Eastside",
+    "birthday": "April 29",
+    "release date": "34",
+    "image": "/images/Sinner/poffy-icon.png",
+    "image_full": "/images/Sinner/poffy-mugshot.png",
     "rank": "A"
   },
   {
@@ -1157,6 +1339,19 @@
     "rank": "A"
   },
   {
+    "name": "Shin",
+    "code": "021",
+    "alignment": "Immortal",
+    "tendency": "Catalyst",
+    "height": "170cm",
+    "birthplace": "Other",
+    "birthday": "November 15",
+    "release date": "34",
+    "image": "/images/Sinner/shin-icon.png",
+    "image_full": "/images/Sinner/shin-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Shrooma",
     "code": "231",
     "alignment": "Pestilence",
@@ -1167,6 +1362,19 @@
     "release date": "24",
     "image": "/images/Sinner/shrooma-icon.png",
     "image_full": "/images/Sinner/shrooma-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Siglinde",
+    "code": "627",
+    "alignment": "War",
+    "tendency": "Endura",
+    "height": "165cm",
+    "birthplace": "Other",
+    "birthday": "July 12",
+    "release date": "37",
+    "image": "/images/Sinner/siglinde-icon.png",
+    "image_full": "/images/Sinner/siglinde-mugshot.png",
     "rank": "A"
   },
   {
@@ -1208,6 +1416,19 @@
     "image_full": "/images/Sinner/summer-mugshot.png",
     "rank": "S"
   },
+    {
+    "name": "Synex",
+    "code": "136",
+    "alignment": "Famine",
+    "tendency": "Fury",
+    "height": "167cm",
+    "birthplace": "Other",
+    "birthday": "January 16",
+    "release date": "36",
+    "image": "/images/Sinner/synex-icon.png",
+    "image_full": "/images/Sinner/synex-mugshot.png",
+    "rank": "S"
+  },
   {
     "name": "Tetra",
     "code": "071",
@@ -1219,6 +1440,32 @@
     "release date": "1",
     "image": "/images/Sinner/tetra-icon.png",
     "image_full": "/images/Sinner/tetra-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Thani",
+    "code": "978",
+    "alignment": "Famine",
+    "tendency": "Arcane",
+    "height": "158cm",
+    "birthplace": "Other",
+    "birthday": "February 7",
+    "release date": "36",
+    "image": "/images/Sinner/thani-icon.png",
+    "image_full": "/images/Sinner/thani-mugshot.png",
+    "rank": "A"
+  },
+    {
+    "name": "Thalia",
+    "code": "411",
+    "alignment": "Greed",
+    "tendency": "Reticle",
+    "height": "165cm",
+    "birthplace": "Eastside",
+    "birthday": "May 22",
+    "release date": "33",
+    "image": "/images/Sinner/thalia-icon.png",
+    "image_full": "/images/Sinner/thalia-mugshot.png",
     "rank": "A"
   },
   {

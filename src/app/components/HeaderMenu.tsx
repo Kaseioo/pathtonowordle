@@ -44,6 +44,22 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ appVersion, is_endless_mode_on,
 				</span>
 			</div>
 			<div>
+
+				<a
+					href="https://discord.gg/rKtEyvKRrq"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="mx-2"
+				>
+					<Image
+						src="/images/discord-white-icon.svg"
+						alt="Join the Discord... if you'd like..."
+						width={32} 
+						height={32}
+						className="inline"
+					/>
+					
+				</a>
 				<a
 					href="https://github.com/Kaseioo/pathtonowordle"
 					target="_blank"
