@@ -16,13 +16,13 @@ export function getSeededCharacter(date: string = getUTCDate()): Character {
   return seeded_character;
 }
 
-export function getCharacterFromCode(code: string): Character {
+export function getCharacterFromName(name: string): Character {
   const foundCharacter = DEFAULT_CHARACTERS.find(
-    (character) => character.code === code
+    (character) => character.name === name
   );
 
   if (!foundCharacter) {
-    throw new Error(`Character with code ${code} not found.`);
+    throw new Error(`Character with name ${name} not found.`);
   }
   
   return foundCharacter;
