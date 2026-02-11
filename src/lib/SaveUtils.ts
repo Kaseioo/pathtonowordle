@@ -145,7 +145,7 @@ function updateScores(game: Game): void {
  */
 function calculateScore(game: Game): void {
 	const total_wins = Object.keys(game.history).filter((date) =>
-		isGameWon(game.history[date], getSeededCharacter(date).code)
+		isGameWon(game.history[date], getSeededCharacter(date).name)
 	).length;
 
 	game.scoring.total_wins = total_wins;
@@ -166,14 +166,14 @@ function calculateStreak(game: Game): void {
 
 	if (
 		last_date &&
-		isGameWon(game.history[last_date], getSeededCharacter(last_date).code)
+		isGameWon(game.history[last_date], getSeededCharacter(last_date).name)
 	) {
 		// for streak, we can start on our most recent date and work backwards since we only want to count wins
 		for (let i = Object.keys(game.history).length - 1; i >= 0; i--) {
 			const date = Object.keys(game.history)[i];
 			const has_won = isGameWon(
 				game.history[date],
-				getSeededCharacter(date).code
+				getSeededCharacter(date).name
 			);
 			if (has_won) {
 				current_streak += 1;
