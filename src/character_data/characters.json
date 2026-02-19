@@ -585,6 +585,19 @@
     "rank": "A"
   },
   {
+    "name": "Helga",
+    "code": "040",
+    "alignment": "Famine",
+    "tendency": "Reticle",
+    "height": "166cm",
+    "birthplace": "Other",
+    "birthday": "December 8",
+    "release date": "41",
+    "image": "/images/Sinner/helga-icon.png",
+    "image_full": "/images/Sinner/helga-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Hella",
     "code": "098",
     "alignment": "Violence",
@@ -661,6 +674,19 @@
     "image": "/images/Sinner/ignis-icon.png",
     "image_full": "/images/Sinner/ignis-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Irrheia",
+    "code": "313",
+    "alignment": "Fraud",
+    "tendency": "Catalyst",
+    "height": "168cm",
+    "birthplace": "Eastside",
+    "birthday": "March 13",
+    "release date": "40",
+    "image": "/images/Sinner/irrheia-icon.png",
+    "image_full": "/images/Sinner/irrheia-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Iron",
@@ -959,6 +985,19 @@
     "release date": "14",
     "image": "/images/Sinner/mantis-icon.png",
     "image_full": "/images/Sinner/mantis-mugshot.png",
+    "rank": "S"
+  },
+  {
+    "name": "Margaret",
+    "code": "029",
+    "alignment": "Death",
+    "tendency": "Catalyst",
+    "height": "178cm",
+    "birthplace": "Other",
+    "birthday": "I don't know",
+    "release date": "41",
+    "image": "/images/Sinner/margaret-icon.png",
+    "image_full": "/images/Sinner/margaret-mugshot.png",
     "rank": "S"
   },
   {
@@ -1298,6 +1337,32 @@
     "image": "/images/Sinner/roulecca-icon.png",
     "image_full": "/images/Sinner/roulecca-mugshot.png",
     "rank": "A"
+  },
+    {
+    "name": "Rumina",
+    "code": "639",
+    "alignment": "Love",
+    "tendency": "Endura",
+    "height": "148cm",
+    "birthplace": "Syndicate",
+    "birthday": "June 26",
+    "release date": "40",
+    "image": "/images/Sinner/rumina-icon.png",
+    "image_full": "/images/Sinner/rumina-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Rust",
+    "code": "247",
+    "alignment": "Treachery",
+    "tendency": "Endura",
+    "height": "186cm",
+    "birthplace": "Other",
+    "birthday": "May 28",
+    "release date": "41",
+    "image": "/images/Sinner/rust-icon.png",
+    "image_full": "/images/Sinner/rust-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Serpent",
