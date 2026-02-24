@@ -1,11 +1,10 @@
-name: Build and Deploy to Sever
+name: Build and Deploy
 
 on:
   push:
     branches: [ main ]
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
@@ -28,27 +27,23 @@ jobs:
 
       - name: Build Next.js Project
         run: npm run build
-        env:
-          CI: true
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Deploy to Oracle Server
+        uses: easingthemes/ssh-deploy@main
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Deploy static site to S3 bucket
-        # Next.js static export defaults to the 'out/' directory
-        run: |
-          aws s3 sync ./out/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-
-      # --- Invalidate CloudFront Cache ---
-      - name: Create CloudFront Invalidation
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DIST_ID }} \
-            --paths "/*"
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          
+          # Standard rsync flags: 
+          # -r (recursive), -l (links), -p (perms), -t (times), -z (compress), -v (verbose)
+          # --delete ensures files you deleted in Git are also deleted on the server
+          ARGS: "-rlptzv --delete"
+          
+          # The source is the folder created by the Next.js build
+          SOURCE: "out/"
+          
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          
+          TARGET: "/var/www/pathtonowordle"
+          
+          EXCLUDE: "/dist/, /node_modules/, /src/, .git/"
