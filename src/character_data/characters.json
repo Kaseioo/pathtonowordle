@@ -91,6 +91,19 @@
     "rank": "S"
   },
   {
+    "name": "Ayiguo",
+    "code": "808",
+    "alignment": "Heresy",
+    "tendency": "Endura",
+    "height": "150cm",
+    "birthplace": "Other",
+    "birthday": "April 7",
+    "release date": "44",
+    "image": "/images/Sinner/ayiguo-icon.png",
+    "image_full": "/images/Sinner/ayiguo-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Bai Yi",
     "code": "027",
     "alignment": "Treachery",
@@ -156,6 +169,19 @@
     "rank": "A"
   },
   {
+    "name": "Celine",
+    "code": "726",
+    "alignment": "Pestilence",
+    "tendency": "Catalyst",
+    "height": "165cm",
+    "birthplace": "Other",
+    "birthday": "September 19",
+    "release date": "47",
+    "image": "/images/Sinner/celine-icon.png",
+    "image_full": "/images/Sinner/celine-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Ceto",
     "code": "118",
     "alignment": "War",
@@ -219,6 +245,19 @@
     "image": "/images/Sinner/cinnabar-icon.png",
     "image_full": "/images/Sinner/cinnabar-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Clementine",
+    "code": "172",
+    "alignment": "Death",
+    "tendency": "Reticle",
+    "height": "168cm",
+    "birthplace": "Eastside",
+    "birthday": "September 27",
+    "release date": "45",
+    "image": "/images/Sinner/clementine-icon.png",
+    "image_full": "/images/Sinner/clementine-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Coquelic",
@@ -507,6 +546,19 @@
     "rank": "B"
   },
   {
+    "name": "Forensica",
+    "code": "510",
+    "alignment": "Love",
+    "tendency": "Catalyst",
+    "height": "166cm",
+    "birthplace": "Eastside",
+    "birthday": "April 21",
+    "release date": "45",
+    "image": "/images/Sinner/forensica-icon.png",
+    "image_full": "/images/Sinner/forensica-mugshot.png",
+    "rank": "A"
+  },
+  {
     "name": "Garofano",
     "code": "514",
     "alignment": "Sloth",
@@ -702,6 +754,19 @@
     "rank": "A"
   },
   {
+    "name": "Isomer",
+    "code": "930",
+    "alignment": "Death",
+    "tendency": "Arcane",
+    "height": "174cm",
+    "birthplace": "Eastside",
+    "birthday": "November 7",
+    "release date": "47",
+    "image": "/images/Sinner/isomer-icon.png",
+    "image_full": "/images/Sinner/isomer-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Jane",
     "code": "626",
     "alignment": "Violence",
@@ -738,6 +803,19 @@
     "release date": "29",
     "image": "/images/Sinner/jelena-icon.png",
     "image_full": "images/Sinner/jelena-mugshot.png",
+    "rank": "S"
+  },
+  {
+    "name": "Jichuan",
+    "code": "124",
+    "alignment": "Fraud",
+    "tendency": "Catalyst",
+    "height": "161cm",
+    "birthplace": "Other",
+    "birthday": "September 25",
+    "release date": "44",
+    "image": "/images/Sinner/jichuan-icon.png",
+    "image_full": "/images/Sinner/jichuan-mugshot.png",
     "rank": "S"
   },
   {
@@ -791,6 +869,45 @@
     "image": "/images/Sinner/kelvin-icon.png",
     "image_full": "/images/Sinner/kelvin-mugshot.png",
     "rank": "B"
+  },
+  {
+    "name": "Kisugi Ai",
+    "code": "---",
+    "alignment": "Infinite",
+    "tendency": "Catalyst",
+    "height": "160cm",
+    "birthplace": "Other",
+    "birthday": "Unknown",
+    "release date": "42",
+    "image": "/images/Sinner/kisugi-ai-icon.png",
+    "image_full": "/images/Sinner/kisugi-ai-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Kisugi Hitomi",
+    "code": "---",
+    "alignment": "Infinite",
+    "tendency": "Umbra",
+    "height": "170cm",
+    "birthplace": "Other",
+    "birthday": "Unknown",
+    "release date": "42",
+    "image": "/images/Sinner/kisugi-hitomi-icon.png",
+    "image_full": "/images/Sinner/kisugi-hitomi-mugshot.png",
+    "rank": "S"
+  },
+  {
+    "name": "Kisugi Rui",
+    "code": "---",
+    "alignment": "Infinite",
+    "tendency": "Arcane",
+    "height": "168cm",
+    "birthplace": "Other",
+    "birthday": "Unknown",
+    "release date": "42",
+    "image": "/images/Sinner/kisugi-rui-icon.png",
+    "image_full": "/images/Sinner/kisugi-rui-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Korryn",
@@ -897,6 +1014,19 @@
     "rank": "A"
   },
   {
+    "name": "Lichen",
+    "code": "396",
+    "alignment": "Immortal",
+    "tendency": "Endura",
+    "height": "170cm",
+    "birthplace": "Other",
+    "birthday": "April 11",
+    "release date": "43",
+    "image": "/images/Sinner/lichen-icon.png",
+    "image_full": "/images/Sinner/lichen-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Lisa",
     "code": "355",
     "alignment": "Heresy",
@@ -994,7 +1124,7 @@
     "tendency": "Catalyst",
     "height": "178cm",
     "birthplace": "Other",
-    "birthday": "I don't know",
+    "birthday": "March 18",
     "release date": "41",
     "image": "/images/Sinner/margaret-icon.png",
     "image_full": "/images/Sinner/margaret-mugshot.png",
@@ -1092,6 +1222,19 @@
     "rank": "A"
   },
   {
+    "name": "Murphy",
+    "code": "131",
+    "alignment": "Limbo",
+    "tendency": "Fury",
+    "height": "162cm",
+    "birthplace": "Eastside",
+    "birthday": "October 3",
+    "release date": "46",
+    "image": "/images/Sinner/murphy-icon.png",
+    "image_full": "/images/Sinner/murphy-mugshot.png",
+    "rank": "S"
+  },
+  {
     "name": "Necresta Hella",
     "code": "098",
     "alignment": "Famine",
@@ -1103,6 +1246,19 @@
     "image": "/images/Sinner/necrestahella-icon.png",
     "image_full": "/images/Sinner/necrestahella-mugshot.png",
     "rank": "S"
+  },
+  {
+    "name": "Norma",
+    "code": "256",
+    "alignment": "Love",
+    "tendency": "Umbra",
+    "height": "172cm",
+    "birthplace": "Eastside",
+    "birthday": "September 4",
+    "release date": "46",
+    "image": "/images/Sinner/norma-icon.png",
+    "image_full": "/images/Sinner/norma-mugshot.png",
+    "rank": "A"
   },
   {
     "name": "NOX",
@@ -1245,6 +1401,19 @@
     "release date": "29",
     "image": "/images/Sinner/pine-icon.png",
     "image_full": "/images/Sinner/pine-mugshot.png",
+    "rank": "A"
+  },
+  {
+    "name": "Pixel",
+    "code": "403",
+    "alignment": "Pestilence",
+    "tendency": "Reticle",
+    "height": "165cm",
+    "birthplace": "Eastside",
+    "birthday": "April 1",
+    "release date": "47",
+    "image": "/images/Sinner/pixel-icon.png",
+    "image_full": "/images/Sinner/pixel-mugshot.png",
     "rank": "A"
   },
   {
@@ -1636,6 +1805,19 @@
     "image": "/images/Sinner/wuhuanzi-icon.png",
     "image_full": "/images/Sinner/wuhuanzi-mugshot.png",
     "rank": "A"
+  },
+  {
+    "name": "Xiaofeng",
+    "code": "108",
+    "alignment": "Greed",
+    "tendency": "Fury",
+    "height": "175cm",
+    "birthplace": "Other",
+    "birthday": "July 26",
+    "release date": "44",
+    "image": "/images/Sinner/xiaofeng-icon.png",
+    "image_full": "/images/Sinner/xiaofeng-mugshot.png",
+    "rank": "S"
   },
   {
     "name": "Yanyan",
